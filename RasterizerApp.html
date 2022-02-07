@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RasterizerApp</title>
+
+    <style>
+        body {
+            background: #c0a154 url(//www.blogblog.com/1kt/watermark/body_background_birds.png) repeat scroll top left;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input id="btn_timeout" type="button" value="timeout" />
+        <input id="btn_resume" type="button" value="resume" />
+        <input id="btn_toggle_drawing_mode" type="button" value="toggle_drawing_mode" />
+        <input id="btn_toggle_ndc_clamp_effect" type="button" value="toggle_ndc_clamp_effect" />
+    </div>
+    <div>
+        <input id="text_s_x" type="text" value="45" />
+        <input id="text_s_y" type="text" value="60" />
+        <input id="btn_set_peek_position" type="button" value="set peek position" />
+        <input id="btn_print_peek_position" type="button" value="print peek position" />
+    </div>
+    <div>上下左右:edsf鍵；前後:wr鍵</div>
+    <canvas id='canvas'></canvas>
+    <canvas id='canvas_line'></canvas>
+    <canvas id='canvas_texture'></canvas>
+    <script src='./dist/RasterizerApp.js'></script>
+</body>
+
+</html>

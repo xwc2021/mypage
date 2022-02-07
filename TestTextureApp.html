@@ -1,0 +1,35 @@
+<html>
+
+<head>
+
+  <title>TestTextureApp</title>
+
+  <style>
+    canvas {
+      border: 1px #000 solid;
+    }
+
+    body {
+      background: #c0a154 url(//www.blogblog.com/1kt/watermark/body_background_birds.png) repeat scroll top left;
+    }
+  </style>
+</head>
+
+<body>
+  <div>UV座標<input id="u" type="text" value="0.5" />
+    <input id="v" type="text" value="0.15" />
+    <input id="btn_reset" type="button" value="reset" />
+    <input id="move_right" type="button" value="右移" />
+    <input id="move_up" type="button" value="上移" />
+  </div>
+  <br />
+  <canvas height="600" id="canvas" width="600"></canvas>
+  <p>
+    4個最近像素的內插結果
+    <canvas height="30" id="canvas2" width="30"></canvas>
+  </p>
+
+  <script src='./dist/TestTextureApp.js'></script>
+</body>
+
+</html>
