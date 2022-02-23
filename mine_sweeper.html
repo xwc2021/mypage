@@ -1,0 +1,353 @@
+<html>
+<head>
+
+<title>Canvas javascript api demo</title>
+<style type="text/css">
+canvas {
+    border:1px #000 solid;
+}
+
+</style>
+</head>
+<body>
+
+<div>
+ <canvas height="400" id="canvas" width="400">this browser does not support canvas...</canvas>
+</div>
+<div>
+w<input id="w" type="text" value="20" /><br />
+h<input id="h" type="text" value="20" /><br />
+mineCount<input id="mineCount" type="text" value="20" /><br />
+showMine<input id="showMine" type="text" value="0" />設成1可以偷看地雷<br />
+<input onclick="newGame()" type="button" value="resetGame" /><br />
+</div>
+<br />
+
+<script type="text/javascript">
+
+var canvasW = 400;
+var canvasH = 400;
+
+//格子大小
+var cellW;
+var cellH;
+
+var R;
+
+var w = 20;
+var h = 20;
+var mineCount = 20;
+var showMine =0;
+
+var map2d;
+//property of map2d
+//mine：是否有地雷
+//visible：是否被點開
+
+MapProperty = function(m,v) 
+{
+ this.mine = m;
+ this.visible = v;
+ this.nearMines = 0;
+}
+
+function newGame()
+{
+ mineCount = parseInt($("mineCount").value);
+ w = parseInt($("w").value);
+ h = parseInt($("h").value);
+ showMine = parseInt($("showMine").value);
+ resetGame();
+ updateCanvas();
+}
+
+var $=function(id){
+    return document.getElementById(id);
+}
+
+function getValue(ui)
+{
+ return ($(ui).value);
+}
+
+function setValue(ui,n)
+{
+ $(ui).value = n;
+}
+
+
+
+//周圍的8格有沒有雷
+function getNearMines(nX,nY)
+{
+ var left = nX-1;
+ var right = nX+1;
+ var top = nY-1;
+ var bottom = nY+1;
+ 
+ var mineCount = 0;
+ for(var x=left;x<=right;x++)
+ {
+  for(var y=top;y<=bottom;y++)
+  {
+   if(!map2d[x] || !map2d[x][y])//超過邊界，跳過
+    continue;
+   if(map2d[x][y].mine)
+    mineCount++;
+  }
+ }
+ 
+ return mineCount;
+}
+
+function updateInformation(nX,nY)
+{
+ //如果是雷，GG
+ if(map2d[nX][nY].mine)
+ {
+  //game over
+  alert("game over");
+ }
+ else //如果不是雷，檢查周圍的8格
+ {
+  map2d[nX][nY].visible = true;//打開
+  //alert(nX+','+nY+'='+map2d[nX][nY].visible);
+  
+  var mines = map2d[nX][nY].nearMines;
+  //如果周圍8格都沒雷，就繼續往外探索
+  if(mines==0)
+  {
+   expansionNear(nX-1,nY-1, 0);
+   expansionNear(nX,nY-1, 1);
+   expansionNear(nX+1,nY-1, 2);
+   
+   expansionNear(nX-1,nY, 3);
+   expansionNear(nX+1,nY, 4);
+   
+   expansionNear(nX-1,nY+1, 5);
+   expansionNear(nX,nY+1, 6);
+   expansionNear(nX+1,nY+1, 7);
+  } 
+ }
+}
+
+//012
+//3 4
+//567
+function expansionNear(nX,nY,dir)
+{
+ if(!map2d[nX] || !map2d[nX][nY])//超過邊界了
+ {
+  //alert(nX+","+nY+" 超過邊界了");
+  return;
+ } 
+ var mines = map2d[nX][nY].nearMines;
+ 
+ map2d[nX][nY].visible = true;//打開
+ //這裡expansion的方式，會隨著所在位置不同，作不同的expansion
+ //所以長的跟windows的踩地雷不太一樣
+ if(mines==0)
+ {
+  if(dir==0)
+  {
+   expansionNear(nX,nY-1, 1);
+   expansionNear(nX-1,nY-1, 0);
+   expansionNear(nX-1,nY, 3);
+  }
+  else if(dir==2)
+  {
+   expansionNear(nX,nY-1, 1);
+   expansionNear(nX+1,nY-1, 2);
+   expansionNear(nX+1,nY, 4);
+  }
+  else if(dir==5)
+  {
+   expansionNear(nX-1,nY, 3);
+   expansionNear(nX-1,nY+1, 5);
+   expansionNear(nX,nY+1, 6);
+  }
+  else if(dir==7)
+  {
+   expansionNear(nX+1,nY, 4);
+   expansionNear(nX+1,nY+1, 7);
+   expansionNear(nX,nY+1, 6);
+  }
+  else if(dir==1)
+   expansionNear(nX,nY-1, 1);
+  else if(dir==6)
+   expansionNear(nX,nY+1, 6);
+  else if(dir==3)
+   expansionNear(nX-1,nY, 3);
+  else if(dir==4)
+   expansionNear(nX+1,nY, 4);
+ }
+}
+
+
+//記下canvas的left、top
+var elemLeft;
+var elemTop;
+
+window.onload=init;
+function init()
+{ 
+ var canvas = $('canvas');
+ var rect = canvas.getBoundingClientRect();
+ elemLeft = rect.left,
+ elemTop = rect.top,
+ canvas.addEventListener('click', function(event) 
+ {
+  var x = event.pageX - elemLeft;
+  var y = event.pageY - elemTop;
+
+  //alert(x+','+y);
+  //alert(elemLeft+','+elemTop);
+  
+  var cellX = Math.floor(x/cellW);
+  var cellY = Math.floor(y/cellH);
+  //alert(cellX+' '+cellY);
+  updateInformation(cellX,cellY);
+  updateCanvas();
+ }, false);
+ 
+ resetGame();
+ updateCanvas();
+}
+
+function resetGame()
+{
+ map2d = new Array(w);
+ for(var x=0;x<w;x++)
+ {
+  map2d[x]= new Array(h);
+ }
+ 
+ for(var x=0;x<w;x++)
+  for(var y=0;y<h;y++)
+   map2d[x][y]=new MapProperty(false,false);
+ 
+ //亂數決定地雷的位置
+ for(var i=0;i<mineCount;i++)
+ {
+  var randomX = Math.floor(w*Math.random());
+  var randomY = Math.floor(h*Math.random());
+  
+  map2d[randomX][randomY].mine = true;
+ }
+ 
+ cellW = canvasW / w;
+ cellH = canvasH / h;
+ R = 0.5*Math.min(cellW,cellH);
+ 
+ //更新資訊：周圍的雷數
+ for(var x=0;x<w;x++)
+ {
+  for(var y=0;y<h;y++)
+  {
+   if(!map2d[x][y].mine)
+   { 
+    map2d[x][y].nearMines = getNearMines(x,y);
+   }
+  }
+ }
+
+}
+
+
+function updateCanvas()
+{
+ var ctx=$('canvas').getContext('2d');
+ ctx.globalCompositeOperation = 'destination-over'; 
+ ctx.clearRect ( 0 , 0 , 600 , 600 );
+ 
+ ctx.strokeStyle="#000000";
+ ctx.beginPath();
+ 
+ //垂直線
+ for(var x=0;x<w;x++)
+ {
+ var left = x*cellW;
+ ctx.moveTo(left,0);
+ ctx.lineTo(left,canvasH);
+ }  
+ 
+ //水平線
+ for(var y=0;y<h;y++)
+ {
+ var top = y*cellH;
+ ctx.moveTo(0,top);
+ ctx.lineTo(canvasW,top);
+ }
+ ctx.stroke();
+ 
+ //畫地雷
+ if(showMine)
+ {
+  ctx.fillStyle="#000000";
+  ctx.beginPath();
+  for(var x=0;x<w;x++)
+  {
+   for(var y=0;y<h;y++)
+   {
+    if(map2d[x][y].mine)
+    { 
+     var nX = cellW*(x+0.5);
+     var nY = cellH*(y+0.5);
+     ctx.moveTo(nX+0.5*cellW,nY);
+     ctx.arc(nX,nY,R,0,2*Math.PI);
+     ctx.fill();
+    }
+   }
+  }
+  ctx.closePath();
+ }
+ 
+ //畫方塊
+ 
+ ctx.fillStyle="#00FFFF";
+ ctx.beginPath();
+ for(var x=0;x<w;x++)
+ {
+  for(var y=0;y<h;y++)
+  {
+   if(!map2d[x][y].visible)
+   { 
+    var nX = cellW*(x);
+    var nY = cellH * (y);
+
+    ctx.moveTo(nX, nY);
+    ctx.rect(nX, nY, cellW, cellH);
+    ctx.fill();
+   }
+  }
+ }
+ ctx.closePath();
+ 
+ //顯示周圍的雷數
+ ctx.fillStyle="#FF0000";
+ ctx.beginPath();
+ for(var x=0;x<w;x++)
+ {
+  for(var y=0;y<h;y++)
+  {
+   
+   if(map2d[x][y].visible && !map2d[x][y].mine)
+   { 
+    var nearMines = map2d[x][y].nearMines;
+    if(nearMines>0)
+    {
+     var nX = cellW*(x+0.5);
+     var nY = cellH*(y+0.5);
+     ctx.fillText(nearMines,nX ,nY);
+    }
+   }
+  }
+ }
+ ctx.closePath();
+ 
+}
+
+
+</script>
+</body>
+</html>
