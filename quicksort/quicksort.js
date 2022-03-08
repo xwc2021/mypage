@@ -1,3 +1,4 @@
+let output = document.getElementById("output");
 function quickSort_dance_version(array, left, right, compare_func) {
     let print = (head) => {
         let decorate = (i) => {
@@ -18,6 +19,7 @@ function quickSort_dance_version(array, left, right, compare_func) {
         for (let i = 0; i < array.length; ++i)
             str += decorate(i) + ",";
         console.log(str);
+        output.innerHTML += str + "\n";
     }
 
     let swap = (array, x, y) => {

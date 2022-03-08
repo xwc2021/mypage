@@ -9,3 +9,5 @@ Hi, These are typescrit test.
 [TestTextureApp](https://xwc2021.github.io/mypage/TestTextureApp.html)
 
 [Game Prototype](https://xwc2021.github.io/mypage/Game/index.html)
+
+[quicksort](https://xwc2021.github.io/mypage/quicksort/index.html)
