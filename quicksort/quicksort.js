@@ -1,4 +1,4 @@
-let sort_process_str = ";"
+let sort_process_str = "";
 function quickSort_dance_version(array, left, right, compare_func) {
     let print = (head) => {
         let decorate = (i) => {
