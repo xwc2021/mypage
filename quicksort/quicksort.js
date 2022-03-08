@@ -1,5 +1,4 @@
-// order: 1->小到大；-1->大到小
-function quickSort_dance_version(array, left, right, order) {
+function quickSort_dance_version(array, left, right, compare_func) {
     let print = (array, head) => {
         let str = head;
         for (let i of array)
@@ -14,16 +13,12 @@ function quickSort_dance_version(array, left, right, order) {
     let swap_condition = (array, focus, cursor) => {
         let cursor_value = array[cursor];
         let focus_value = array[focus];
+        if (focus < cursor) // 主角在左邊
+            return compare_func(focus_value, cursor_value);
 
-        if (focus < cursor) { // 主角在左邊
-            let diff = focus_value - cursor_value;
-            if (diff * order > 0)
-                return true;
-        } else if (cursor < focus) { // 主角在右邊
-            let diff = cursor_value - focus_value;
-            if (diff * order > 0)
-                return true;
-        }
+        if (cursor < focus) // 主角在右邊
+            return compare_func(cursor_value, focus_value);
+
         return false;
     };
 
@@ -36,12 +31,12 @@ function quickSort_dance_version(array, left, right, order) {
 
     while (true) {
         if (focus == cursor) { // 結束交叉
-            quickSort_dance_version(array, left, focus - 1, order);
-            quickSort_dance_version(array, focus + 1, right, order);
+            quickSort_dance_version(array, left, focus - 1, compare_func);
+            quickSort_dance_version(array, focus + 1, right, compare_func);
             return;
         }
 
-        if (swap_condition(array, focus, cursor, order)) {
+        if (swap_condition(array, focus, cursor)) {
             swap(array, focus, cursor); // 交換值
             [focus, cursor] = [cursor, focus]; // 交換索引
             cursor_offset *= -1; // 換方向
@@ -53,5 +48,5 @@ function quickSort_dance_version(array, left, right, order) {
 
 let source = [8, 6, 4, 1, 7, 3, 9, 2, 5, 0];
 console.log(source);
-quickSort_dance_version(source, 0, 9, 1);
+quickSort_dance_version(source, 0, 9, (x, y) => (x - y) > 0);
 console.log(source);
