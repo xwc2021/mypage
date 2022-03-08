@@ -55,12 +55,15 @@ function quickSort_dance_version(array, left, right, compare_func) {
             swap(array, focus, cursor); // 交換值
             [focus, cursor] = [cursor, focus]; // 交換索引
             cursor_offset *= -1; // 換方向
+            print("排序過程 array : ");
         }
         cursor += cursor_offset;
     }
 }
 
-let source = [8, 6, 4, 1, 7, 3, 9, 2, 5, 0];
+// https://www.youtube.com/watch?v=ywWBy6J5gz8
+// 改成跟影片一樣的值
+let source = [3, 0, 1, 8, 7, 2, 5, 4, 9, 6];
 console.log(source);
 quickSort_dance_version(source, 0, 9, (x, y) => x > y);
 console.log(source);
