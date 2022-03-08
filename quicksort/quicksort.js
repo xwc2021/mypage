@@ -48,5 +48,5 @@ function quickSort_dance_version(array, left, right, compare_func) {
 
 let source = [8, 6, 4, 1, 7, 3, 9, 2, 5, 0];
 console.log(source);
-quickSort_dance_version(source, 0, 9, (x, y) => (x - y) > 0);
+quickSort_dance_version(source, 0, 9, (x, y) => x > y);
 console.log(source);
