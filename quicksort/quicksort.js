@@ -57,6 +57,7 @@ function quickSort_dance_version(array, left, right, compare_func) {
         cursor += cursor_offset;
 
         if (focus == cursor) { // 結束交叉
+            print("結束交叉 array : ");
             quickSort_dance_version(array, left, focus - 1, compare_func);
             quickSort_dance_version(array, focus + 1, right, compare_func);
             return;
