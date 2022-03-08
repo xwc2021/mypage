@@ -47,19 +47,20 @@ function quickSort_dance_version(array, left, right, compare_func) {
 
     while (true) {
         print("排序過程 array : ");
-        if (focus == cursor) { // 結束交叉
-            quickSort_dance_version(array, left, focus - 1, compare_func);
-            quickSort_dance_version(array, focus + 1, right, compare_func);
-            return;
-        }
 
         if (swap_condition(array, focus, cursor)) {
             swap(array, focus, cursor); // 交換值
             [focus, cursor] = [cursor, focus]; // 交換索引
             cursor_offset *= -1; // 換方向
-            print("排序過程 array : ");
+            print("進行交換 array : ");
         }
         cursor += cursor_offset;
+
+        if (focus == cursor) { // 結束交叉
+            quickSort_dance_version(array, left, focus - 1, compare_func);
+            quickSort_dance_version(array, focus + 1, right, compare_func);
+            return;
+        }
     }
 }
 
