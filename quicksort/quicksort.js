@@ -1,8 +1,22 @@
 function quickSort_dance_version(array, left, right, compare_func) {
-    let print = (array, head) => {
+    let print = (head) => {
+        let decorate = (i) => {
+            let value = array[i];
+            let msg = value;
+            if (i == focus)
+                msg = "(" + msg + ")";
+            if (i == cursor)
+                msg = "#" + msg;
+            if (i == left)
+                msg = "[" + msg;
+            if (i == right)
+                msg = msg + "]";
+            return msg;
+        };
+
         let str = head;
-        for (let i of array)
-            str += i + ",";
+        for (let i = 0; i < array.length; ++i)
+            str += decorate(i) + ",";
         console.log(str);
     }
 
@@ -30,6 +44,7 @@ function quickSort_dance_version(array, left, right, compare_func) {
         return;
 
     while (true) {
+        print("排序過程 array : ");
         if (focus == cursor) { // 結束交叉
             quickSort_dance_version(array, left, focus - 1, compare_func);
             quickSort_dance_version(array, focus + 1, right, compare_func);
@@ -42,7 +57,6 @@ function quickSort_dance_version(array, left, right, compare_func) {
             cursor_offset *= -1; // 換方向
         }
         cursor += cursor_offset;
-        print(array, "排序過程 array : ");
     }
 }
 
