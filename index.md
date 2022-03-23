@@ -1,6 +1,6 @@
 ## Welcome to GitHub Pages
 
-Hi, These are typescrit test.
+These are typescrit test.
 
 [RasterizerApp](https://xwc2021.github.io/mypage/RasterizerApp.html)
 
@@ -14,8 +14,8 @@ This is Unity prototype
 
 Javascript
 
-[quicksort](https://xwc2021.github.io/mypage/quicksort/index.html)
+[quicksort](quicksort/index.html)
 
 CSS practice
 
-[learn css with csscoke](https://xwc2021.github.io/mypage/css-practice/learn_css_with_csscoke.html) 
+[learn css with csscoke](css-practice/learn_css_with_csscoke.html) 
