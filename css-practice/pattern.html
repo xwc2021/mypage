@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 神奇的checkboard，竟然是利用 background-position offset
+        https://projects.verou.me/css3patterns/?fbclid=IwAR1BG22ucTNN8UlkGaTa3Ji281ENvNreXVWSPSrpXxuJXaWfXKiNjSGPhUo */
+
+        .container {
+            width: 25px;
+            height: 25px;
+        }
+
+        .container2 {
+            width: 50px;
+            height: 50px;
+        }
+
+        .checkboard {
+            background: linear-gradient(45deg, #dca 12%, transparent 0, transparent 88%, #dca 0),
+                linear-gradient(135deg, transparent 37%, #a85 0, #a85 63%, transparent 0),
+                linear-gradient(45deg, transparent 37%, #dca 0, #dca 63%, transparent 0) #753;
+            background-size: 25px 25px;
+
+            width: 100%;
+            height: 100%;
+        }
+
+        .offset {
+            background-position: 0 0, 0px 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="checkboard"></div>
+    </div>
+    <hr>
+
+    <div class="container2">
+        <div class="checkboard"></div>
+    </div>
+    <hr>
+
+    <div class="container">
+        <div class="checkboard offset"></div>
+    </div>
+
+</body>
+
+</html>

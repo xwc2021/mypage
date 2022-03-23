@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+        }
+
+        .container {
+            position: relative;
+            width: 960px;
+            margin: 40px auto;
+            background-color: aqua;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+
+            height: 100px;
+        }
+
+        .container .pic {
+            width: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+
+            /* 沒設left right就會置中 */
+            position: absolute;
+        }
+
+        .container .pic img {
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        .container nav {
+            margin: auto;
+        }
+
+        .container nav a:nth-child(3) {
+            margin-left: 200px;
+        }
+
+        .container nav a:after {
+            position: absolute;
+            height: 2px;
+            left: 50%;
+            right: 50%;
+            bottom: 10px;
+
+            content: '';
+            background-color: pink;
+            transition: 0.3s;
+        }
+
+        .container nav a:hover:after {
+            left: 0;
+            right: 0;
+        }
+
+        .container nav a {
+            position: relative;
+            width: 150px;
+            box-sizing: border-box;
+            text-align: center;
+            display: inline-block;
+            transition: 0.3s;
+            transform: translateY(0%);
+            text-decoration: none;
+            padding: 20px 40px;
+            border: 1px solid;
+        }
+
+        .container nav a:hover {
+            transform: translateY(-5%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="pic">
+            <img src="https://picsum.photos/300/300?random=1" alt="">
+        </div>
+        <nav>
+            <a href="#">apple</a>
+            <a href="#">banana</a>
+            <a href="#">cat</a>
+            <a href="#">dog</a>
+        </nav>
+
+    </div>
+
+</body>
+
+</html>

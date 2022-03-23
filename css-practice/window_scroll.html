@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 在it邦幫忙看到的拉門效果，拿來改1下
+        https://ithelp.ithome.com.tw/questions/10205665?sc=nl.daily */
+        .top_backgroud {
+            width: 100%;
+            height: 960px;
+            background-image: url("https://picsum.photos/1200/600?random=0");
+            background-repeat: no-repeat;
+            background-position: center center;
+
+            /* 固定圖像 */
+            background-attachment: fixed;
+        }
+
+        .sliding_door {
+            width: 100%;
+            height: 500px;
+            background-color: #fff;
+            box-shadow: 10px 10px 100px hsla(240, 40%, 15%);
+            position: relative;
+        }
+
+        .sliding_door_backgroud {
+            width: 100%;
+            height: 1200px;
+            position: relative;
+            /* background-color: aqua; */
+            background-image: url("https://picsum.photos/1200/600?random=1");
+            background-repeat: no-repeat;
+            background-position: center center;
+            z-index: -1;
+
+            /* 固定圖像 */
+            background-attachment: fixed;
+        }
+
+        .backgroud_override_1 {
+            background-image: url("https://picsum.photos/1200/600?random=2");
+        }
+
+        .backgroud_override_2 {
+            background-image: url("https://picsum.photos/1200/600?random=3");
+        }
+
+        .block {
+            height: 700px;
+        }
+
+        h2 {
+            text-align: center;
+            line-height: 2;
+        }
+
+        .test {
+            width: 100%;
+            height: 400px;
+            background-color: yellow;
+            position: relative;
+        }
+
+        .test_inner {
+            width: 100%;
+            height: 600px;
+            background-color: greenyellow;
+            position: relative;
+            z-index: -1;
+        }
+
+        .footer_link {
+            padding: 10px 0 20px 0;
+        }
+
+        .footer_link a {
+            text-decoration: none;
+            text-align: center;
+            width: 50%;
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function another_view() {
+            window.location.reload();
+            window.scroll(0,0);
+        }
+    </script>
+    <span id="top_ref"></span>
+    <div class="top_backgroud"></div>
+    <div class="sliding_door">
+        <h2>圖片</h2>
+        <div class="sliding_door_backgroud">
+        </div>
+    </div>
+    <div class="block"></div>
+    <div class="sliding_door">
+        <h2>圖片</h2>
+        <div class="sliding_door_backgroud backgroud_override_1">
+        </div>
+    </div>
+    <div class="block"></div>
+    <div class="sliding_door">
+        <h2>圖片</h2>
+        <div class="sliding_door_backgroud backgroud_override_2">
+        </div>
+
+        <div class="footer_link"> <a href="javascript:another_view()">another
+                view</a>
+            <a
+                href="https://htmlpreview.github.io/?https://github.com/xwc2021/what-is-radiance/blob/main/learn_css_with_csscoke.html">learn_css_with_csscoke</a>
+        </div>
+    </div>
+    <!-- <div class="block"></div>
+    <div class="test">abc
+        <div class="test_inner">cc</div>
+    </div> -->
+</body>
+
+</html>

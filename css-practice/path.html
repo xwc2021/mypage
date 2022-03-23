@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .container {
+            width: 960px;
+            margin: auto;
+            background-color: purple;
+        }
+
+        .container .path {
+            display: flex;
+        }
+
+        .path li {
+            padding: 20px 40px;
+            /* border: 1px solid pink; */
+        }
+
+        .path li+li {
+            padding-left: 0;
+        }
+
+        .path li+li::before {
+            content: '>';
+            margin-right: 25px;
+            color: white;
+            /* border: 1px solid aqua; */
+        }
+
+        .path a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .path a:hover,
+        .path li:last-child a {
+            color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <ol class="path">
+            <li><a href="#">AA</a> </li>
+            <li><a href="#">BB</a></li>
+            <li><a href="#">CC</a></li>
+            <li><a href="#">DD</a></li>
+        </ol>
+    </div>
+
+
+</body>
+
+</html>

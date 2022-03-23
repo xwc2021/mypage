@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .wrap {
+            /* background-color: aqua; */
+            width: 960px;
+            margin: 200px auto 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .wrap li {
+            position: relative;
+            font-size: 40px;
+
+            text-align: center;
+            outline: 1px dotted blue;
+
+            /* 計算 */
+            /* https://photos.app.goo.gl/CH8xdqsjFGPHvbfBA */
+
+            /* 式算表小幫手 */
+            /* https://docs.google.com/spreadsheets/d/1lw_Y27RhZH-O3jQsu7KkimTcZ-gbWZvK8fJMGgcuaic/edit?usp=sharing */
+
+
+            /* 第0組 */
+            /* width: 220px;
+            height: 220px;
+            margin: 0 50px 0px;
+
+            margin-bottom: -60px; */
+
+
+            /* 第1組(Amos的Demo值) */
+            line-height: 200px;
+            width: 200px;
+            height: 200px;
+            margin: 0 60px 0px;
+
+            margin-bottom: -40px;
+
+            /* 第2組 */
+            /* width: 50px;
+            height: 50px;
+            margin: 0 135px 0px;
+
+            margin-bottom: 110px; */
+
+            /* 第3組 */
+            /* width: 300px;
+            height: 300px;
+            margin: 0 10px 0px; 
+
+            margin-bottom: -140px; */
+        }
+
+        .wrap li::before {
+            position: absolute;
+            content: '';
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotate(45deg);
+            outline: 1px solid pink;
+            background-color: rgba(0, 255, 0, 0.7);
+        }
+
+        .wrap li:nth-child(n+4) {
+            /* 第1組 */
+            /* 第2組 */
+            /* 第3組 */
+            /* 960/3/2=160 */
+            left: 160px;
+
+        }
+
+        .wrap li:nth-child(n+4)::before {
+            outline: 1px solid greenyellow;
+            background-color: rgba(0, 0, 255, 0.7);
+        }
+
+        .wrap li:nth-child(n+7)::before {
+            outline: 1px solid pink;
+            background-color: rgba(255, 0, 0, 0.7);
+            ;
+        }
+
+        .wrap li:nth-child(n+7) {
+            left: 0px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <ol class="wrap">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+    </ol>
+
+</body>
+
+</html>

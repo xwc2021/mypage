@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>∫ cos(θi)dω ：均勻採樣，作1次黎曼積分、積分域為2π</p>
+    <div id="r1"></div>
+    <p>∫ ∫ cos(θ)sin(θ)dθ dϕ ：分別作2次黎曼積分、積分域分別為π/2和2π</p>
+    <div id="r2"></div>
+    <script>
+
+        let z_n = 60;
+        let x_n = 60;
+
+        // ∫ ∫cos(θ)sin(θ)dθ dϕ
+        // 在這裡看到的
+        // https://learnopengl-cn.github.io/07%20PBR/03%20IBL/01%20Diffuse%20irradiance/?fbclid=IwAR1mEiUqJezZ5mNwRh0w9MA6yuGLG5nXjERX2pLEGcStuwB6nSvSQgr6oAI
+        function integral_2_times() {
+            console.log("2次黎曼積分：沒想到這個是收斂最快的");
+            let diff_z = (Math.PI / 2) / z_n;
+            let θ = 0;
+            let sum = 0;
+            for (let z = 0; z < z_n; ++z) {
+
+                // console.log(θ)
+                sum += Math.cos(θ) * Math.sin(θ);
+                θ += diff_z;
+            }
+
+            sum = (Math.PI / 2) * sum / z_n;
+            console.log(sum);
+
+            let sum_outer = (Math.PI * 2) * (sum * x_n) / x_n;
+            console.log(sum_outer);
+
+            document.getElementById('r2').innerHTML = sum_outer;
+        }
+
+        // ∫cos(θi)dω 使用等步採樣
+        function integral_1_times() {
+            console.log("1次黎曼積分、等步採樣：因為不均勻，直接用2π/n，跟本不能用也");
+            let diff_z = (Math.PI / 2) / z_n;
+            let θ = 0;
+            let sum = 0;
+            for (let z = 0; z < z_n; ++z) {
+
+                // console.log(θ)
+                sum += Math.cos(θ);
+                θ += diff_z;
+            }
+            console.log(sum);
+
+            let sum_outer = (Math.PI * 2) * (sum * x_n) / (x_n * z_n);
+            console.log(sum_outer);
+        }
+
+        // ∫cos(θi)dω 使用均勻採樣
+        function integral_1_times_by_hemisphereSample_uniform() {
+            console.log("1次黎曼積分、均勻採樣");
+            let diff_cosθ = (1) / z_n;
+            let θ = 0;
+            let sum = 0;
+
+            // console.log(diff_cosθ);
+            for (let z = 0; z < z_n; ++z) {
+                // https://zhuanlan.zhihu.com/p/49746076
+                // 文章裡的 cos(θ)=1-2x，但這裡-1<cos(θ)<1
+                // 我這裡只需要 0<cos(θ)<1，所以變形一下
+                // -1<1-2x<1
+                // 0<2-2x<2
+                // 0<1-x<1
+                // 變形的方法，參考自 https://zhuanlan.zhihu.com/p/103715075
+                let cosθ = 1 - z * diff_cosθ;
+                // console.log(cosθ);
+                sum += cosθ;
+            }
+            console.log(sum);
+
+            let sum_outer = (Math.PI * 2) * (sum * x_n) / (x_n * z_n);
+            console.log(sum_outer);
+
+            document.getElementById('r1').innerHTML = sum_outer;
+        }
+
+        integral_2_times();
+        integral_1_times();
+        integral_1_times_by_hemisphereSample_uniform();
+
+        console.log('ground truth, ∫cos(θi)dω =', Math.PI);
+    </script>
+</body>
+
+</html>

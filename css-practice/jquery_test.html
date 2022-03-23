@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap {
+            width: 200px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .container {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .circle {
+            box-sizing: border-box;
+            width: 200px;
+            height: 200px;
+
+            border-radius: 50%;
+            animation: animate 1s infinite alternate;
+        }
+
+        @keyframes animate {
+            0% {
+                border-radius: 50%;
+                background-color: blueviolet;
+            }
+
+            100% {
+                border-radius: 0%;
+                background-color: yellow;
+                width: 10px;
+                height: 10px;
+
+            }
+        }
+
+        .btn {
+            border-radius: 20px;
+            width: 60px;
+            height: 20px;
+            background-color: yellow;
+            text-align: center;
+            line-height: 20px;
+            border: 2px solid greenyellow;
+            transition: background-color 1s 0s ease,
+                padding 0.5s 0.25s ease;
+        }
+
+        .btn:hover {
+            background-color: aqua;
+            padding: 0 50px;
+        }
+
+        .content {
+            width: 200px;
+            height: 600px;
+            background-color: greenyellow;
+        }
+
+        @media screen and (min-width:768px) {
+            .wrap {
+                width: 800px;
+                margin: auto;
+            }
+        }
+
+        .test {
+            background-color: aqua;
+            width: 600px;
+            height: 600px;
+            background: url('https://picsum.photos/300/300?random=1') no-repeat center center / cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="container">
+            <div class="circle"></div>
+        </div>
+        <div class="container">
+            <div class="circle"></div>
+        </div>
+        <div class="container">
+            <div class="circle"></div>
+        </div>
+        <div class="container">
+            <div class="circle"></div>
+        </div>
+    </div>
+
+    <div class="test"></div>
+
+    <div class='btn'>btn1</div>
+    <div class='content'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, cum quo excepturi ducimus
+        earum cupiditate blanditiis impedit reiciendis, tempora maxime itaque dignissimos voluptas adipisci ullam
+        quaerat necessitatibus vero. Fugit, magnam?
+
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo ipsa voluptatem recusandae eligendi totam numquam
+        debitis tempore doloremque! Totam, ipsum obcaecati. Amet beatae impedit doloribus quo non? Necessitatibus,
+        debitis assumenda?</div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+        $(document).ready(() => {
+            $('.btn').click((e) => {
+
+                $('.content').slideToggle();
+            })
+        })
+    </script>
+</body>
+
+</html>

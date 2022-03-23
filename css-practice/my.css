@@ -1,0 +1,85 @@
+body {
+    background: #c0a154 url(//www.blogblog.com/1kt/watermark/body_background_birds.png) repeat scroll top left;
+}
+
+li {
+    margin:20px 0;
+}
+
+
+a:link {color:#f78769;}    /* 設定尚未點閱過的連結樣式 */
+a:visited {color:#f78769;} /* 設定過去曾經閱過的連結 */
+a:hover {color:gray;}   /* 設定滑鼠游標指在連結位置上的樣式 */
+a:active {color:#f78769;}  /* 設定上點擊過的連結樣式 */
+
+.discussInfo,
+.single {
+    background:transparent url(//www.blogblog.com/1kt/watermark/post_background_birds.png) repeat scroll top left;
+    color: black;
+    box-sizing: border-box;
+
+    /* display: inline-block; */
+    padding: 20px;
+    margin: 20px;
+    /* border: 2px solid rgb(255, 68, 68); */
+    /* line-height: 1; */
+    /* text-indent:20px; */
+}
+
+
+
+.discussMeta{
+    margin: 10px 0 0 0;
+}
+
+.discussMeta::before{
+    display: block;
+    content: "";
+    height:1px;
+    margin: 2px 0;
+    background-color: black;
+}
+
+.discussReply{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.discussTitle{
+    order:1;
+}
+
+.FixedArea{
+    position:fixed;
+    right: 30px;
+}
+
+.FixedArea a{
+    text-decoration: none;
+    line-height: 16px;
+}
+
+.editor_say::before{
+    content: "小編註：";
+}
+
+.editor_say{
+    margin: 15px 0;
+    font-size: small;
+}
+
+.footer_link {
+    padding: 10px 0 20px 0;
+}
+
+.footer_link a {
+    text-decoration: none;
+    text-align: center;
+    width: 50%;
+    display: block;
+    margin: auto;
+}
+
+a{
+    text-decoration: none;
+}
