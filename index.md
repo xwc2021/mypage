@@ -15,7 +15,7 @@ Javascript
 
 
 CSS practice  
-[learn css with csscoke](css-practice/learn_css_with_csscoke.html) 
+[learn css with csscoke](https://htmlpreview.github.io/?https://github.com/xwc2021/what-is-radiance/blob/main/learn_css_with_csscoke.html) 
 
 
 Radiance學習筆記  
