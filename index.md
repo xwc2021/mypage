@@ -19,4 +19,4 @@ CSS practice
 
 
 Radiance學習筆記  
-[html](https://htmlpreview.github.io/?https://github.com/xwc2021/css-practice/blob/main/what_is_radiance.html) 
+[html](https://xwc2021.github.io/mypage/radiance-reading-notes/index.html) 
