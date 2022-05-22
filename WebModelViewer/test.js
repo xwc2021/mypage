@@ -28,7 +28,7 @@ window.addEventListener("resize", function () {
 //     scene.activeCamera.alpha += 0.5 * Math.PI;
 // });
 
-var is_skinned_mesh = false;
+var is_skinned_mesh = true;
 
 if (is_skinned_mesh) {
     const importPromise = BABYLON.SceneLoader.ImportMeshAsync(["Armature"], "GLTF/", "E_act_move.gltf", scene);
@@ -40,9 +40,10 @@ if (is_skinned_mesh) {
         result.transformNodes[14].position = new BABYLON.Vector3(0, -1.5, 0);
 
         // 動態改材質
-        // var m = new BABYLON.StandardMaterial("myMaterial", scene);
-        // m.diffuseColor = new BABYLON.Color3(0, 1, 0);
-        // result.meshes[1].material = m;
+        var m = new BABYLON.StandardMaterial("myMaterial", scene);
+        var path = (Math.random() > 0.5) ? "Texture/uv_E.png" : "Texture/E.png";
+        m.diffuseTexture = new BABYLON.Texture(path, scene, true, false);
+        result.meshes[1].material = m;
     });
 } else {
     const importPromise = BABYLON.SceneLoader.ImportMeshAsync(["MotoBody"], "GLTF/", "bike_3.gltf", scene);
