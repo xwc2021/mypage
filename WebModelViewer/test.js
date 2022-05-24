@@ -5,10 +5,11 @@ const createScene = function () {
 
     const scene = new BABYLON.Scene(engine);
 
-    const camera = new BABYLON.ArcRotateCamera("camera", Math.PI * 0.5, Math.PI * 0.5, 5, new BABYLON.Vector3(0, 0, 0));
+    const camera = new BABYLON.ArcRotateCamera("camera", Math.PI * 0.5, Math.PI * 0.5, 10, new BABYLON.Vector3(0, 0, 0));
     camera.attachControl(canvas, true);
     const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0));
 
+    scene.debugLayer.show();
     return scene;
 };
 
@@ -28,35 +29,22 @@ window.addEventListener("resize", function () {
 //     scene.activeCamera.alpha += 0.5 * Math.PI;
 // });
 
-var is_skinned_mesh = true;
+var r;
+const importPromise = BABYLON.SceneLoader.ImportMeshAsync(["Armature"], "GLTF/", "E_act_move.gltf", scene);
+// const importPromise = BABYLON.SceneLoader.ImportMeshAsync(["SK_N_41_Body_001_2_SkeletalMeshComponent0"], "GLTF/Pet2/", "PetBody.gltf", scene);
+importPromise.then((result) => {
+    // Result has meshes, particleSystems, skeletons, animationGroups and transformNodes
+    console.log(result);
 
-if (is_skinned_mesh) {
-    const importPromise = BABYLON.SceneLoader.ImportMeshAsync(["Armature"], "GLTF/", "E_act_move.gltf", scene);
-    importPromise.then((result) => {
-        // Result has meshes, particleSystems, skeletons, animationGroups and transformNodes
-        console.log(result);
+    r = result;
 
-        // 移動
-        result.transformNodes[14].position = new BABYLON.Vector3(0, -1.5, 0);
+    var sphere = BABYLON.Mesh.CreateSphere("sphereObject", 16, 1, scene);
+    sphere.attachToBone(r.skeletons[0].bones[7], r.meshes[0]);
 
-        // 動態改材質
-        var m = new BABYLON.StandardMaterial("myMaterial", scene);
-        var path = (Math.random() > 0.5) ? "Texture/uv_E.png" : "Texture/E.png";
-        m.diffuseTexture = new BABYLON.Texture(path, scene, true, false);
-        result.meshes[1].material = m;
-    });
-} else {
-    const importPromise = BABYLON.SceneLoader.ImportMeshAsync(["MotoBody"], "GLTF/", "bike_3.gltf", scene);
-    importPromise.then((result) => {
-        // Result has meshes, particleSystems, skeletons, animationGroups and transformNodes
-        console.log(result);
 
-        // 移動
-        result.transformNodes[0].position = new BABYLON.Vector3(0, -0.5, 0);
-
-        // 動態改材質
-        var m = new BABYLON.StandardMaterial("myMaterial", scene);
-        m.diffuseColor = new BABYLON.Color3(0, 1, 0);
-        result.meshes[3].material = m;
-    });
-}
+    // 動態改材質
+    var m = new BABYLON.StandardMaterial("myMaterial", scene);
+    var path = (Math.random() > 0.5) ? "Texture/uv_E.png" : "Texture/E.png";
+    m.diffuseTexture = new BABYLON.Texture(path, scene, true, false);
+    result.meshes[1].material = m;
+});
