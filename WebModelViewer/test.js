@@ -39,7 +39,7 @@ importPromise.then((result) => {
     g_result.meshes[0].position = new BABYLON.Vector3(2, 0, 0);
 
     var m = getNoeMaterial();;
-    m.getBlockByName("Color3 Pink").value = new BABYLON.Color3(0, 1, 0);
+    m.getBlockByName("Color3 Pink").value = new BABYLON.Color3(1, 1, 0);
     g_result.meshes[1].material = m;
 
 });
