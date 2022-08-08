@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        .nav {
+            position: relative;
+            max-width: 1400px;
+            background: rgb(255, 182, 255);
+            text-align: center;
+            font-size: 0px;
+            margin: auto;
+        }
+
+        .nav a {
+            color: black;
+            display: inline-block;
+            font-size: 50px;
+            box-sizing: border-box;
+            line-height: 50px;
+            padding: 10px 10px;
+            /* transition: 1.5s; */
+            text-decoration: none;
+        }
+
+        .nav a:hover {
+            background-color: orange;
+        }
+
+        .sentence {
+            font-size: 35px;
+            line-height: 70px;
+            text-align: center;
+            color: gray;
+        }
+
+        .level-title {
+            border: 5px solid rgb(138, 138, 255);
+            max-width: 960px;
+            margin: auto;
+            text-align: center;
+            font-size: 70px;
+            background-color: bisque;
+        }
+
+        .box {
+            max-width: 960px;
+            border: 5px solid rgb(138, 138, 255);
+            background-color: rgb(206, 196, 179);
+            ;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .note {
+            box-sizing: border-box;
+            /* display: inline-block; */
+            width: 300px;
+            padding: 20px;
+            margin: 10px;
+            background-color: rgb(245, 220, 173);
+            border: 2px solid rgb(246, 140, 140);
+            /* line-height: 1; */
+            /* text-indent:20px; */
+        }
+
+        .fixed-for-note {
+            background-color: #fff;
+            height: 20px;
+            clear: both;
+        }
+
+        img {
+            width: 260px;
+            height: 160px;
+            object-fit: contain;
+            /* border: 2px solid aqua; */
+        }
+
+        .wanted {
+            text-align: center;
+            font-size: 60px;
+        }
+
+        .people {
+            text-align: center;
+            font-size: 25px;
+        }
+
+        .money {
+            text-align: center;
+            font-size: 50px;
+        }
+
+        .box-level-8 {
+            background-color: rgb(255, 255, 255);
+        }
+
+        .box-level-0 {
+            background: linear-gradient(90deg,
+                    rgb(255, 162, 162) 0%, rgb(255, 162, 162) 14.2%,
+                    rgb(255, 186, 57) 14.2%, rgb(255, 186, 57) 28.4%,
+                    rgb(255, 255, 134) 28.4%, rgb(255, 255, 134) 42.6%,
+                    rgb(138, 255, 138) 42.6%, rgb(138, 255, 138) 56.8%,
+                    rgb(151, 199, 246) 56.8%, rgb(151, 199, 246) 71%,
+                    rgb(120, 120, 255) 71%, rgb(120, 120, 255) 85.2%,
+                    rgb(195, 121, 255) 85.2%, rgb(195, 121, 255) 100%);
+        }
+
+        .box-level-1 {
+            background: linear-gradient(90deg,
+                    rgb(255, 162, 162) 0%, rgb(255, 162, 162) 50%,
+                    rgb(255, 186, 57) 50%, rgb(255, 186, 57) 100%);
+        }
+
+        .box-level-2 {
+            background: linear-gradient(90deg,
+                    rgb(255, 255, 134) 0%, rgb(255, 255, 134) 50%,
+                    rgb(138, 255, 138) 50%, rgb(138, 255, 138) 100%);
+
+        }
+
+        .box-level-3 {
+            background-color: rgb(151, 199, 246);
+        }
+
+        .box-level-4 {
+            background-color: rgb(120, 120, 255);
+        }
+
+        .box-level-5 {
+            background-color: rgb(195, 121, 255);
+        }
+
+
+        .block {
+            height: 50px;
+        }
+
+        .big-block {
+            height: 100px;
+        }
+
+        .remark {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<link rel="stylesheet" type="text/css" href="my.css">
+
+<body>
+    <div class="nav">
+        <a href="">⬆️</a>
+        <a href="">⬅️</a>
+        <a href="">⬇️</a>
+        <a href="">➡️</a>
+        <a href="">Development Game</a>
+        <a href="">⬜️</a>
+        <a href="">🔺</a>
+        <a href="">⚪️</a>
+        <a href="">✖️</a>
+    </div>
+    <div class="sentence">
+        <div>
+            Give Me 5
+        </div>
+        <div>
+            <a href="https://dev.epicgames.com/community/learning?industry=games">UE5影片教學</a>
+        </div>
+        <div>
+            <a href="https://docs.unrealengine.com/5.0/zh-CN/">UE5文檔</a>
+        </div>
+    </div>
+    <div class="block"></div>
+
+    <div>
+        <div class="level-title">網遊</div>
+        <div class="box box-level-4">
+            <div class="note">
+                <div class="wanted">WANTED</div>
+                <img src="https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2015/02/18/99/550688.jpg&w=800&h=800&exp=3600"
+                    alt="">
+                <div class="people">網遊 Joshua L. Glazer</div>
+                <div class="money">700000000</div>
+            </div>
+            <div class="note">
+                <div class="wanted">WANTED</div>
+                <img src="https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2015/02/18/99/550688.jpg&w=800&h=800&exp=3600"
+                    alt="">
+                <div class="people">網遊 Sanjay Madhav</div>
+                <div class="money">700000000</div>
+            </div>
+            <div class="note">
+                <div class="wanted">WANTED</div>
+                <img src="https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2015/02/18/99/550688.jpg&w=800&h=800&exp=3600"
+                    alt="">
+                <div class="people">Unreal</div>
+                <div class="money">700000000</div>
+            </div>
+            <div class="fixed-for-note"></div>
+        </div>
+    </div>
+    <div class="big-block"></div>
+
+    <div>
+        <div class="level-title">遊戲AI</div>
+        <div class="box box-level-3">
+
+            <div class="note">
+                <div class="wanted">WANTED</div>
+                <img src="https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2015/02/18/99/550688.jpg&w=800&h=800&exp=3600"
+                    alt="">
+                <div class="people">Unreal</div>
+                <div class="money">700000000</div>
+            </div>
+            <div class="fixed-for-note"></div>
+        </div>
+    </div>
+    <div class="big-block"></div>
+
+    <div>
+        <div class="level-title">物理</div>
+        <div class="box box-level-2">
+            <div class="note">
+                <div class="wanted">WANTED</div>
+                <img src="https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2015/02/18/99/550688.jpg&w=800&h=800&exp=3600"
+                    alt="">
+                <div class="people">
+                    <div>
+                        流體
+                    </div>
+                    <div>Jos Stam </div>
+                </div>
+                <div class="money">700000000</div>
+                <div class="remark">不是 有些code怎麼跟書內容對不起來？</div>
+            </div>
+            <div class="note">
+                <div class="wanted">WANTED</div>
+                <img src="https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2015/02/18/99/550688.jpg&w=800&h=800&exp=3600"
+                    alt="">
+                <div class="people">
+                    <div>Game Physics Series</div>
+                    <div>周明倫</div>
+                </div>
+                <div class="money">700000000</div>
+            </div>
+            <div class="note">
+                <div class="wanted">WANTED</div>
+                <img src="https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2015/02/18/99/550688.jpg&w=800&h=800&exp=3600"
+                    alt="">
+                <div class="people">
+                    <div>Unreal</div>
+                    <div>EPIC Games</div>
+                </div>
+                <div class="money">700000000</div>
+            </div>
+
+            <div class="fixed-for-note"></div>
+        </div>
+    </div>
+    <div class="big-block"></div>
+
+    <div>
+        <div class="level-title">渲染</div>
+        <div class="box box-level-1">
+            <div class="note">
+                <div class="wanted">WANTED</div>
+                <img src="https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2015/02/18/99/550688.jpg&w=800&h=800&exp=3600"
+                    alt="">
+                <div class="people">CG Peter Shirley</div>
+                <div class="money">700000000</div>
+            </div>
+            <div class="note">
+                <div class="wanted">WANTED</div>
+                <img src="https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2015/02/18/99/550688.jpg&w=800&h=800&exp=3600"
+                    alt="">
+                <div class="people">PBR-White-Paper</div>
+                <div class="money">700000000</div>
+            </div>
+            <div class="note">
+                <div class="wanted">WANTED</div>
+                <img src="https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2015/02/18/99/550688.jpg&w=800&h=800&exp=3600"
+                    alt="">
+                <div class="people">Unreal</div>
+                <div class="money">700000000</div>
+            </div>
+            <div class="fixed-for-note"></div>
+        </div>
+    </div>
+    <div id="msg" style="color: red; font-size: 20px;">msg</div>
+    <script>
+        // create the global ue5(...) helper function
+        "object" != typeof ue && (ue = {}), uuidv4 = function () { return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, function (t) { return (t ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> t / 4).toString(16) }) }, ue5 = function (r) { return "object" != typeof ue.interface || "function" != typeof ue.interface.broadcast ? (ue.interface = {}, function (t, e, n, o) { var u, i; "string" == typeof t && ("function" == typeof e && (o = n, n = e, e = null), u = [t, "", r(n, o)], void 0 !== e && (u[1] = e), i = encodeURIComponent(JSON.stringify(u)), "object" == typeof history && "function" == typeof history.pushState ? (history.pushState({}, "", "#" + i), history.pushState({}, "", "#" + encodeURIComponent("[]"))) : (document.location.hash = i, document.location.hash = encodeURIComponent("[]"))) }) : (i = ue.interface, ue.interface = {}, function (t, e, n, o) { var u; "string" == typeof t && ("function" == typeof e && (o = n, n = e, e = null), u = r(n, o), void 0 !== e ? i.broadcast(t, JSON.stringify(e), u) : i.broadcast(t, "", u)) }); var i }(function (t, e) { if ("function" != typeof t) return ""; var n = uuidv4(); return ue.interface[n] = t, setTimeout(function () { delete ue.interface[n] }, 1e3 * Math.max(1, parseInt(e) || 0)), n });
+    </script>
+    <script>
+
+
+        window.onload = function () {
+            document.getElementById("msg").innerHTML = "cat";
+        };
+
+        window.addEventListener("scroll", function (e) { if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { ue5("scroll_down", { "y": window.scrollY }); alert(location.href); document.getElementById("msg").innerHTML = "scroll_down"; } });
+    </script>
+</body>
+
+</html>
