@@ -1,32 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
-
-@xwc2021
-xwc2021
-/
-css-practice
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-css-practice/Development-Game/Development-Game-Phaze-2-1.html
-@xwc2021
-xwc2021 不是，這本好厚@@
-Latest commit 8a9a570 on 13 Apr
-History
-1 contributor
-292 lines (259 sloc) 8.54 KB
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -332,15 +303,24 @@ History
             ue.interface = {}, ue.interface.broadcast = function (e, t) {
                 if ("string" == typeof e) {
                     var o = [e, ""]; void 0 !== t && (o[1] = t); var n = encodeURIComponent(JSON.stringify(o));
-                    "object" == typeof history && "function" == typeof history.pushState ? (history.pushState(
-                        {}, "", "#" + n), history.pushState({}, "", "#" + encodeURIComponent("[]"))) :
-                        (document.location.hash = n, document.location.hash = encodeURIComponent("[]"))
+                    var testing = "object" == typeof history && "function" == typeof history.pushState;
+                    if (testing) {
+                        history.pushState({}, "", "#" + n);
+                        history.pushState({}, "", "#" + encodeURIComponent("[]"));
+                        document.getElementById("msg").innerHTML = "history";
+                    }
+                    else {
+                        document.location.hash = n;
+                        document.location.hash = encodeURIComponent("[]");
+                        document.getElementById("msg").innerHTML = "location";
+                    }
                 }
             }) :
             function (e) {
                 ue.interface = {}, ue.interface.broadcast = function (t, o) {
                     "string" == typeof t && (void 0 !== o ? e.broadcast(t, JSON.stringify(o)) :
-                        e.broadcast(t, ""))
+                        e.broadcast(t, ""));
+                    document.getElementById("msg").innerHTML = "broadcast";
                 }
             }(ue.interface), ue4 = ue.interface.broadcast;
 
@@ -348,7 +328,7 @@ History
             document.getElementById("msg").innerHTML = "cat";
         };
 
-        window.addEventListener("scroll", function (e) { if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { ue4("scroll_down", { "y": window.scrollY }); document.getElementById("msg").innerHTML = "scroll_down"; } });
+        window.addEventListener("scroll", function (e) { if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { ue4("scroll_down", { "y": window.scrollY }); alert(location.href); } });
     </script>
 </body>
 
