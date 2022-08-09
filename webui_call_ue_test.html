@@ -298,6 +298,7 @@
         </div>
     </div>
     <div id="msg" style="color: red; font-size: 20px;">msg</div>
+    <div id="msg2" style="color: red; font-size: 20px;">msg</div>
     <script>
         "object" != typeof ue || "object" != typeof ue.interface ? ("object" != typeof ue && (ue = {}),
             ue.interface = {}, ue.interface.broadcast = function (e, t) {
@@ -328,7 +329,7 @@
             document.getElementById("msg").innerHTML = "cat";
         };
 
-        window.addEventListener("scroll", function (e) { if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { ue4("scroll_down", { "y": window.scrollY }); alert(location.href); } });
+        window.addEventListener("scroll", function (e) { if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { ue4("scroll_down", { "y": window.scrollY }); document.getElementById("msg2").innerHTML = location.href;; } });
     </script>
 </body>
 
