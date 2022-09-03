@@ -24,10 +24,3 @@ Radiance學習筆記
 
 Babylon.js  
 [load GLTF](https://xwc2021.github.io/mypage/WebModelViewer) 
-
-
-Test WebUI call UE  
-[Test WebUI call UE ](https://xwc2021.github.io/mypage/webui_call_ue_test.html) 
-
-ue5_webui_test.html  
-[ue5_webui_test.html](https://xwc2021.github.io/mypage/ue5_webui_test.html) 
