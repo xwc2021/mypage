@@ -26,5 +26,5 @@ Babylon.js
 [load GLTF](https://xwc2021.github.io/mypage/WebModelViewer) 
 
 
-three_js_chage_color_test
-[load GLTF](https://xwc2021.github.io/mypage/three_js_chage_color_test) 
+three_js_chage_color_test  
+[three_js_chage_color_test](https://xwc2021.github.io/mypage/three_js_chage_color_test) 
