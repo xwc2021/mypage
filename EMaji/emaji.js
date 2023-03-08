@@ -79,7 +79,7 @@ function show_cards(array) {
     return str;
 }
 
-// 隨機發牌
+// 洗牌
 // https://shubo.io/javascript-random-shuffle/
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -88,14 +88,30 @@ function shuffle(array) {
     }
 }
 
-shuffle(cards);
-let cards_16 = cards.slice(0, 16);
-let raw = show_cards(cards_16);
-cards_16.sort((a, b) => a - b);
-let sort = show_cards(cards_16);
+function pick_from(all, pick_len) {
+    shuffle(all);
+    let picks = all.slice(0, pick_len);
+    let raw = show_cards(picks);
+    picks.sort((a, b) => a - b);
+    let sort = show_cards(picks);
 
-document.getElementById("show_total").innerHTML = show_cards(cards);
-document.getElementById("show_list").innerHTML = raw;
-document.getElementById("show_sort_list").innerHTML = sort;
+    document.getElementById("show_total").innerHTML = show_cards(all);
+    document.getElementById("show_list").innerHTML = raw;
+    document.getElementById("show_sort_list").innerHTML = sort;
+}
+
+// 全部洗牌要能直接胡牌太難了
+// pick_from(cards, 16);
+
+// 只針對萬洗牌
+let cars_36 = cards.splice(0, 36);
+// 其他|含眼|不含
+//  3   14   13
+//  6   11   10
+//  9    8    7
+// 12    5    4
+// 15    2    1
+pick_from(cars_36, 13);
+
 
 // 判定聽幾個洞
