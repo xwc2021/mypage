@@ -95,10 +95,148 @@ function pick_from(all, pick_len) {
     picks.sort((a, b) => a - b);
     let sort = show_cards(picks);
 
+    find_hole(picks);
+
     document.getElementById("show_total").innerHTML = show_cards(all);
     document.getElementById("show_list").innerHTML = raw;
     document.getElementById("show_sort_list").innerHTML = sort;
 }
+
+function find_eye_group(list) {
+    let g0 = 0; let g1 = 0; let g2 = 0;
+    for (let x of list) {
+
+        switch (x) {
+            case 1:
+            case 4:
+            case 7:
+                g0++;
+                break;
+            case 2:
+            case 5:
+            case 8:
+                g1++;
+                break;
+            case 3:
+            case 6:
+            case 9:
+                g2++;
+                break;
+        }
+    }
+    // console.log(g0, g1, g2);
+    g0 = g0 % 3, g1 = g1 % 3, g2 = g2 % 3;
+    // console.log(g0, g1, g2);
+    if (g0 != g1 && g0 != g2 && g1 == g2) { // g0
+        console.log("1,4,7");
+        return 0;
+    } else if (g1 != g0 && g1 != g2 && g0 == g2) { // g1
+        console.log("2,5,8");
+        return 1;
+    } if (g2 != g0 && g2 != g1 && g0 == g1) { // g2
+        console.log("3,6,9");
+        return 2;
+    } else
+        return -1;
+}
+
+function statics(list) {
+    // 統計每張牌有幾張
+    let dic = {};
+    for (let i = 1; i <= 9; ++i)
+        dic[i] = 0;
+    for (let x of list) {
+        if (dic[x] >= 0)
+            ++dic[x];
+    }
+    return dic;
+}
+
+function get_can_add_cards(list) {
+    let dic_statics = statics(list);
+
+    // 已經有4個就過慮掉
+    let can_add_cards = [];
+    for (let key in dic_statics) {
+        let value = dic_statics[key];
+        if (value != 4)
+            can_add_cards.push(parseInt(key)); // key是字串！
+    }
+    return can_add_cards;
+}
+
+function remove_eye(list, value) {
+    let keep = [];
+    let remove_counter = 0;
+    for (let x of list) {
+        if (x != value)
+            keep.push(x);
+        else {
+            if (remove_counter < 2)
+                ++remove_counter;
+            else keep.push(x);
+        }
+    }
+    return keep;
+}
+
+// 是不是胡牌
+function is_hu(list) {
+    return false;
+}
+
+function test_all_eye(list, eyes) {
+    let dic_statics = statics(list);
+    for (let eye of eyes) {
+        if (dic_statics[eye] < 2)
+            continue;
+
+        let remind_list = remove_eye(list, eye);
+        console.log("remind_list", eye, show_cards(remind_list));
+
+        if (is_hu(remind_list))
+            return true;
+    }
+
+    return false;
+}
+
+// 判定聽幾個洞
+function find_hole(list) {
+    let listen_cards = [];
+
+    // 取得可以用的牌
+    let can_add_cards = get_can_add_cards(list);
+    for (let x of can_add_cards) {
+        let new_list = list.slice();
+        new_list.push(x);
+        new_list.sort((a, b) => a - b);
+
+        console.log("");
+        console.log(x, show_cards(new_list));
+
+        let g = find_eye_group(new_list);
+        let is_hu = false
+        switch (g) {
+            case 0:
+                is_hu = test_all_eye(new_list, [1, 4, 7]);
+                break;
+            case 1:
+                is_hu = test_all_eye(new_list, [2, 5, 8]);
+                break;
+            case 2:
+                is_hu = test_all_eye(new_list, [3, 6, 9]);
+                break;
+        }
+
+        if (is_hu)
+            listen_cards.push(x);
+    }
+
+    console.log("聽", show_cards(listen_cards));
+    // +1跑一次全部
+}
+
 
 // 全部洗牌要能直接胡牌太難了
 // pick_from(cards, 16);
@@ -111,11 +249,11 @@ let cars_36 = cards.splice(0, 36);
 //  9    8    7
 // 12    5    4
 // 15    2    1
-// pick_from(cars_36, 13);
+pick_from(cars_36, 13);
 
 
 // C all.length取pick_count
-// 雖然會有重覆但不管
+// 雖然會重覆算但不管
 function C(all, pick_count) {
     // init 
     let temp_list = [];
@@ -139,10 +277,7 @@ function list_all(all, left_borlder, right_border, now_index, pick_count, temp_l
     }
 }
 
-
 // 取5個就算超久了
 // https://gadget.chienwen.net/x/math/percomb
 // C(cars_36, 5);
-C(cars_36, 2);
 
-// 判定聽幾個洞
