@@ -43,7 +43,7 @@
         <div class="item" id="listen_cards_list">Nothing</div>
     </div>
     <script src="data.js"></script>
-    <script src="emaji.js"></script>
+    <script src="peeker.js"></script>
     <script src="emurator.js"></script>
     <script>
         function pick_from(cards, pick_len) {
@@ -75,14 +75,14 @@
             document.getElementById("show_list").innerHTML = raw;
             document.getElementById("show_sort_list").innerHTML = sort;
 
+            let listen_list = "";
             let msg = "";
-            let listen_list = "聽：";
             for (let key in dic_holes) {
                 listen_list += Drawer.emojis[key] + ",";
                 msg += "聽" + Drawer.emojis[key] + "拆分：" + dic_holes[key] + "<br/>";
             }
             if (listen_list != "")
-                document.getElementById("listen_cards_list").innerHTML = listen_list + "<br/>" + msg;
+                document.getElementById("listen_cards_list").innerHTML = "聽：" + listen_list + "<br/>" + msg;
         }
 
         let cars_36 = null;
