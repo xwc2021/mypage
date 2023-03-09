@@ -95,14 +95,20 @@ function pick_from(all, pick_len) {
     picks.sort((a, b) => a - b);
     let sort = show_cards(picks);
 
-    let holes = find_hole(picks);
+    let dic_holes = find_hole(picks);
 
     document.getElementById("show_total").innerHTML = show_cards(all);
     document.getElementById("show_list").innerHTML = raw;
     document.getElementById("show_sort_list").innerHTML = sort;
 
-    if (holes.length)
-        document.getElementById("listen_cards_list").innerHTML = show_cards(holes);
+    let msg = "";
+    let listen_list = "聽：";
+    for (let key in dic_holes) {
+        listen_list += emojis[key] + ",";
+        msg += "聽" + emojis[key] + "拆分：" + dic_holes[key] + "<br/>";
+    }
+    if (listen_list != "")
+        document.getElementById("listen_cards_list").innerHTML = listen_list + "<br/>" + msg;
 }
 
 function find_eye_group(list) {
@@ -183,7 +189,7 @@ function remove_eye(list, value) {
     return keep;
 }
 
-function if_has_AAA_then_remove(list) {
+function if_has_AAA_then_remove(list, split_block) {
     let min = list[0];
     let remove_counter = 0;
     for (let x of list) {
@@ -195,11 +201,12 @@ function if_has_AAA_then_remove(list) {
         return false;
 
     list.splice(0, 3);
+    split_block.push(show_cards([min, min, min]));
     console.log("刻子", show_cards(list));
     return true;
 }
 
-function if_has_ABC_then_remove(list) {
+function if_has_ABC_then_remove(list, split_block) {
     let remove_index_list = [0];
     let find_counter = 1;
 
@@ -222,23 +229,24 @@ function if_has_ABC_then_remove(list) {
     for (let index of remove_index_list) {
         list.splice(index, 1);
     }
+    split_block.push(show_cards([min - 2, min - 1, min]));
     console.log("順子", show_cards(list));
     return true;
 
 }
 
 // 是不是胡牌
-function is_hu(list) {
+function is_hu(list, split_block) {
     let temp = list.slice();
     while (true) {
         if (temp.length == 0)
             return true;
 
-        let success = if_has_AAA_then_remove(temp);
+        let success = if_has_AAA_then_remove(temp, split_block);
         if (success)
             continue;
 
-        success = if_has_ABC_then_remove(temp);
+        success = if_has_ABC_then_remove(temp, split_block);
         if (success)
             continue;
 
@@ -247,16 +255,18 @@ function is_hu(list) {
     }
 }
 
-function test_all_eye(list, eyes) {
+function test_all_eye(list, eyes, split_block) {
     let dic_statics = statics(list);
     for (let eye of eyes) {
+        split_block.length = 0;
         if (dic_statics[eye] < 2)
             continue;
 
         let remind_list = remove_eye(list, eye);
+        split_block.push(show_cards([eye, eye]));
         console.log("remind_list", eye, show_cards(remind_list));
 
-        if (is_hu(remind_list))
+        if (is_hu(remind_list, split_block))
             return true;
     }
 
@@ -265,7 +275,7 @@ function test_all_eye(list, eyes) {
 
 // 判定聽幾個洞
 function find_hole(list) {
-    let listen_cards = [];
+    let dic_listen_cards = {};
 
     // 取得可以用的牌
     let can_add_cards = get_can_add_cards(list);
@@ -280,25 +290,27 @@ function find_hole(list) {
         console.log("test:", emojis[x], "->", show_cards(new_list));
 
         let g = find_eye_group(new_list);
-        let is_hu = false
+        let is_hu = false;
+        // 存放拆出來的牌
+        let split_block = [];
         switch (g) {
             case 0:
-                is_hu = test_all_eye(new_list, [1, 4, 7]);
+                is_hu = test_all_eye(new_list, [1, 4, 7], split_block);
                 break;
             case 1:
-                is_hu = test_all_eye(new_list, [2, 5, 8]);
+                is_hu = test_all_eye(new_list, [2, 5, 8], split_block);
                 break;
             case 2:
-                is_hu = test_all_eye(new_list, [3, 6, 9]);
+                is_hu = test_all_eye(new_list, [3, 6, 9], split_block);
                 break;
         }
 
         if (is_hu)
-            listen_cards.push(x);
+            dic_listen_cards[x] = split_block;
     }
 
-    console.log("聽", show_cards(listen_cards));
-    return listen_cards;
+    console.log("聽", dic_listen_cards);
+    return dic_listen_cards;
 }
 
 
