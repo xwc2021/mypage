@@ -91,6 +91,17 @@ function shuffle(array) {
 function pick_from(all, pick_len) {
     shuffle(all);
     let picks = all.slice(0, pick_len);
+
+    // 測試：
+    // 文章的作者是用16張牌
+    // picks = [1, 1, 2, 2, 2, 3, 3, 3, 4, 5, 6, 7, 8, 9, 9, 9];
+    // picks = [1, 1, 1, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 9, 9];
+    // picks = [1, 1, 1, 2, 3, 4, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8];
+    // picks = [1, 1, 1, 2, 3, 4, 5, 5, 6, 6, 7, 7, 8, 9, 9, 9];
+    // picks = [1, 1, 1, 2, 3, 4, 4, 5, 5, 6, 6, 7, 8, 9, 9, 9];
+
+    // 這裡是13張牌
+    // picks = [1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9];
     let raw = show_cards(picks);
     picks.sort((a, b) => a - b);
     let sort = show_cards(picks);
@@ -320,6 +331,7 @@ function find_hole(list) {
 // 只針對萬洗牌
 let cars_36 = cards.splice(0, 36);
 // 其他|含眼|不含
+//  0   17   16
 //  3   14   13
 //  6   11   10
 //  9    8    7
