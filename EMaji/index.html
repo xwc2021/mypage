@@ -47,6 +47,7 @@
     <script src="emurator.js"></script>
     <script>
         function pick_from(cards, pick_len) {
+            // 抽牌
             Tool.shuffle(cards);
             let picks = cards.slice(0, pick_len);
 
@@ -61,12 +62,15 @@
             // 這裡是13張牌
             // picks = [1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9];
 
+            // 排序
             let raw = Drawer.show_cards(picks);
             picks.sort((a, b) => a - b);
             let sort = Drawer.show_cards(picks);
 
+            // 聽幾個洞
             let dic_holes = Peeker.find_hole(picks);
 
+            // 顯示
             document.getElementById("show_total").innerHTML = Drawer.show_cards(cards);
             document.getElementById("show_list").innerHTML = raw;
             document.getElementById("show_sort_list").innerHTML = sort;
@@ -89,10 +93,6 @@
             // 只針對萬洗牌
             cars_36 = cards.splice(0, 36);
 
-            // 取5個就算超久了
-            // https://gadget.chienwen.net/x/math/percomb
-            // C(cars_36, 5);
-
             // 其他|含眼|不含
             //  0   17   16
             //  3   14   13
@@ -101,12 +101,13 @@
             // 12    5    4
             // 15    2    1
             pick_from(cars_36, 13);
+
+            // 雖然會重覆算但不管
+            // 取4個就算很久了 https://gadget.chienwen.net/x/math/percomb
+            // Enumerator.C(cars_36, 4);
+            // Enumerator.C(["A", "B", "C", "D"], 2);
         };
-
-
     </script>
-
-
 </body>
 
 </html>

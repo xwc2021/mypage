@@ -1,13 +1,14 @@
-let enumerator = {
+let Enumerator = {
+    // 列出組合
     // C all.length取pick_count
-    // 雖然會重覆算但不管
     C: function (all, pick_count) {
         // init 
+        Enumerator.counter = 0;
         let temp_list = [];
         for (let i = 0; i < pick_count; ++i)
             temp_list.push(-1);
 
-        enumerator.list_all(all, 0, all.length - 1, 0, pick_count, temp_list)
+        Enumerator.list_all(all, 0, all.length - 1, 0, pick_count, temp_list);
     },
 
     counter: 0,
@@ -18,9 +19,9 @@ let enumerator = {
             temp_list[now_index] = pick_one;
 
             if (now_index == pick_count - 1)
-                console.log(++counter, temp_list);
+                console.log(++this.counter, temp_list);
             else
-                enumerator.list_all(all, i + 1, right_border, now_index + 1, pick_count, temp_list);
+                Enumerator.list_all(all, i + 1, right_border, now_index + 1, pick_count, temp_list);
         }
     }
 };
