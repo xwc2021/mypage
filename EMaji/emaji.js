@@ -95,11 +95,14 @@ function pick_from(all, pick_len) {
     picks.sort((a, b) => a - b);
     let sort = show_cards(picks);
 
-    find_hole(picks);
+    let holes = find_hole(picks);
 
     document.getElementById("show_total").innerHTML = show_cards(all);
     document.getElementById("show_list").innerHTML = raw;
     document.getElementById("show_sort_list").innerHTML = sort;
+
+    if (holes.length)
+        document.getElementById("listen_cards_list").innerHTML = show_cards(holes);
 }
 
 function find_eye_group(list) {
@@ -180,9 +183,68 @@ function remove_eye(list, value) {
     return keep;
 }
 
+function if_has_AAA_then_remove(list) {
+    let min = list[0];
+    let remove_counter = 0;
+    for (let x of list) {
+        if (x == min)
+            ++remove_counter;
+    }
+
+    if (remove_counter < 3)
+        return false;
+
+    list.splice(0, 3);
+    console.log("刻子", show_cards(list));
+    return true;
+}
+
+function if_has_ABC_then_remove(list) {
+    let remove_index_list = [0];
+    let find_counter = 1;
+
+    let min = list[0];
+    for (let i = 0; i < list.length; ++i) {
+        let value = list[i]
+        if (value == min + 1) {
+            remove_index_list.push(i);
+            ++min;
+            ++find_counter;
+        }
+
+        if (find_counter == 3)
+            break;
+    }
+    if (find_counter < 3)
+        return false;
+
+    remove_index_list.reverse();
+    for (let index of remove_index_list) {
+        list.splice(index, 1);
+    }
+    console.log("順子", show_cards(list));
+    return true;
+
+}
+
 // 是不是胡牌
 function is_hu(list) {
-    return false;
+    let temp = list.slice();
+    while (true) {
+        if (temp.length == 0)
+            return true;
+
+        let success = if_has_AAA_then_remove(temp);
+        if (success)
+            continue;
+
+        success = if_has_ABC_then_remove(temp);
+        if (success)
+            continue;
+
+        // 拆牌失敗
+        return false;
+    }
 }
 
 function test_all_eye(list, eyes) {
@@ -207,13 +269,15 @@ function find_hole(list) {
 
     // 取得可以用的牌
     let can_add_cards = get_can_add_cards(list);
+
+    // 每個都測1次
     for (let x of can_add_cards) {
         let new_list = list.slice();
         new_list.push(x);
         new_list.sort((a, b) => a - b);
 
         console.log("");
-        console.log(x, show_cards(new_list));
+        console.log("test:", emojis[x], "->", show_cards(new_list));
 
         let g = find_eye_group(new_list);
         let is_hu = false
@@ -234,7 +298,7 @@ function find_hole(list) {
     }
 
     console.log("聽", show_cards(listen_cards));
-    // +1跑一次全部
+    return listen_cards;
 }
 
 
