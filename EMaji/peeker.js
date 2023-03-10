@@ -122,8 +122,8 @@ let Peeker = {
         return true;
     },
 
-    // 是不是胡牌
-    is_hu: function (list, split_block) {
+    // 是不是n個AAA、m個ABC
+    is_nAAA_mABC: function (list, split_block) {
         let temp = list.slice();
         while (true) {
             if (temp.length == 0)
@@ -153,7 +153,7 @@ let Peeker = {
             split_block.push(Drawer.show_cards([eye, eye]));
             console.log("remind_list", eye, Drawer.show_cards(remind_list));
 
-            if (Peeker.is_hu(remind_list, split_block))
+            if (Peeker.is_nAAA_mABC(remind_list, split_block))
                 return true;
         }
 
