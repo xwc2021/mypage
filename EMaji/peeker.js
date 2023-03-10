@@ -177,22 +177,22 @@ let Peeker = {
             console.log("test:", Drawer.emojis[x], "->", Drawer.show_cards(new_list));
 
             let g = Peeker.find_eye_group(new_list);
-            let is_hu = false;
+            let has_1eye_nAAA_mABC = false;
             // 存放拆出來的牌
             let split_block = [];
             switch (g) {
                 case 0:
-                    is_hu = Peeker.test_all_eye(new_list, [1, 4, 7], split_block);
+                    has_1eye_nAAA_mABC = Peeker.test_all_eye(new_list, [1, 4, 7], split_block);
                     break;
                 case 1:
-                    is_hu = Peeker.test_all_eye(new_list, [2, 5, 8], split_block);
+                    has_1eye_nAAA_mABC = Peeker.test_all_eye(new_list, [2, 5, 8], split_block);
                     break;
                 case 2:
-                    is_hu = Peeker.test_all_eye(new_list, [3, 6, 9], split_block);
+                    has_1eye_nAAA_mABC = Peeker.test_all_eye(new_list, [3, 6, 9], split_block);
                     break;
             }
 
-            if (is_hu)
+            if (has_1eye_nAAA_mABC)
                 dic_listen_cards[x] = split_block;
         }
 
