@@ -68,7 +68,7 @@ let Statistician = {
 
         let card_list = [];
         for (let key in temp_shape) {
-            console.log("shape", key)
+            console.log("花色", key)
             card_list.push(...ColorMapping.data[key]);
         }
         return card_list;
@@ -218,8 +218,6 @@ let Peeker = {
         let dic_card_count = Statistician.statistics_card_count(list);
         for (let eye of eyes) {
             split_block.length = 0;
-            // if (dic_card_count[eye] < 2)
-            //     continue;
 
             let remain_list = Peeker.remove_eye(list, eye);
             split_block.push(DataMapping.show_cards([eye, eye]));
@@ -228,8 +226,10 @@ let Peeker = {
 
             if (Peeker.is_nAAA_mABC(remain_list, split_block))
                 return true;
+            else console.log("測試失敗");
         }
 
+        console.log("全部失敗");
         return false;
     },
 
@@ -261,7 +261,7 @@ let Peeker = {
             new_list.sort((a, b) => a - b);
 
             console.log("");
-            console.log("test:", DataMapping.emojis[x], "->", DataMapping.show_cards(new_list));
+            console.log("test card:", DataMapping.emojis[x], "->", DataMapping.show_cards(new_list));
 
             let g = Peeker.find_eye_group(new_list);
             let has_1eye_nAAA_mABC = false;
