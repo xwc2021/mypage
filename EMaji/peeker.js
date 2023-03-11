@@ -35,10 +35,10 @@ let Peeker = {
     statics: function (list) {
         // 統計每張牌有幾張
         let dic = {};
-        for (let i = 1; i <= 9; ++i)
-            dic[i] = 0;
         for (let x of list) {
-            if (dic[x] >= 0)
+            if (dic[x] == undefined)
+                dic[x] = 1;
+            else
                 ++dic[x];
         }
         return dic;
