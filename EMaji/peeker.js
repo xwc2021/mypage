@@ -144,11 +144,11 @@ let Peeker = {
             if (dic_statics[eye] < 2)
                 continue;
 
-            let remind_list = Peeker.remove_eye(list, eye);
+            let remain_list = Peeker.remove_eye(list, eye);
             split_block.push(Drawer.show_cards([eye, eye]));
-            console.log("remind_list", eye, Drawer.show_cards(remind_list));
+            console.log("remain_list", eye, Drawer.show_cards(remain_list));
 
-            if (Peeker.is_nAAA_mABC(remind_list, split_block))
+            if (Peeker.is_nAAA_mABC(remain_list, split_block))
                 return true;
         }
 
