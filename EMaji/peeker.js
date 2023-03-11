@@ -159,7 +159,7 @@ let Peeker = {
     find_hole: function (list) {
         let dic_listen_cards = {};
 
-        // 取得可以用的牌
+        // 用來+1測試的牌
         let can_add_cards = Peeker.get_can_add_cards(list);
 
         // 每個都測1次

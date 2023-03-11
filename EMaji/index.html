@@ -47,6 +47,9 @@
     <script src="emurator.js"></script>
     <script>
         function pick_from(cards, pick_len) {
+            document.getElementById("show_total").innerHTML = Drawer.show_cards(cards);
+            // return;
+
             // 抽牌
             Tool.shuffle(cards);
             let picks = cards.slice(0, pick_len);
@@ -91,7 +94,7 @@
             // pick_from(cards, 16);
 
             // 只針對萬洗牌
-            cars_36 = cards.splice(0, 36);
+            cars_36 = cards.slice(0, 36);
 
             // 其他|含眼|不含
             //  0   17   16
@@ -101,6 +104,7 @@
             // 12    5    4
             // 15    2    1
             pick_from(cars_36, 13);
+
 
             // 雖然會重覆算但不管
             // 取4個就算很久了 https://gadget.chienwen.net/x/math/percomb
