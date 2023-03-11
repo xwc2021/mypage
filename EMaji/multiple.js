@@ -11,5 +11,10 @@ let cars_36 = cards.slice(0, 36);
 let picks = Tool.shuffle_and_pickup(cars_36, 14);
 picks.push(35, 35);
 
+// 13張牌+3張東
+// picks = [1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 35, 35, 35];
+
+// 14張牌+2張東
+// picks = [1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9, 35, 35];
 
 render(picks);
