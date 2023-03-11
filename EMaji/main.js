@@ -1,31 +1,15 @@
 
-function pick_from(cards, pick_len) {
-
-    // 抽牌
-    Tool.shuffle(cards);
-    let picks = cards.slice(0, pick_len);
-
-    // 測試：
-    // 文章的作者是用16張牌
-    // picks = [1, 1, 2, 2, 2, 3, 3, 3, 4, 5, 6, 7, 8, 9, 9, 9];
-    // picks = [1, 1, 1, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 9, 9];
-    // picks = [1, 1, 1, 2, 3, 4, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8];
-    // picks = [1, 1, 1, 2, 3, 4, 5, 5, 6, 6, 7, 7, 8, 9, 9, 9];
-    // picks = [1, 1, 1, 2, 3, 4, 4, 5, 5, 6, 6, 7, 8, 9, 9, 9];
-
-    // 這裡是13張牌
-    // picks = [1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9];
+function render(cards) {
 
     // 排序
-    let raw = DataMapping.show_cards(picks);
-    picks.sort((a, b) => a - b);
-    let sort = DataMapping.show_cards(picks);
+    let raw = DataMapping.show_cards(cards);
+    cards.sort((a, b) => a - b);
+    let sort = DataMapping.show_cards(cards);
 
     // 聽幾個洞
-    let dic_holes = Peeker.find_hole(picks);
+    let dic_holes = Peeker.find_hole(cards);
 
     // 顯示
-    document.getElementById("show_total").innerHTML = DataMapping.show_cards(cards);
     document.getElementById("show_list").innerHTML = raw;
     document.getElementById("show_sort_list").innerHTML = sort;
 
@@ -54,7 +38,22 @@ window.onload = function () {
     //  9    8    7
     // 12    5    4
     // 15    2    1
-    pick_from(cars_36, 13);
+
+    let picks = Tool.shuffle_and_pickup(cars_36, 13);
+
+    // 測試：
+    // 文章的作者是用16張牌
+    // picks = [1, 1, 2, 2, 2, 3, 3, 3, 4, 5, 6, 7, 8, 9, 9, 9];
+    // picks = [1, 1, 1, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 9, 9];
+    // picks = [1, 1, 1, 2, 3, 4, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8];
+    // picks = [1, 1, 1, 2, 3, 4, 5, 5, 6, 6, 7, 7, 8, 9, 9, 9];
+    // picks = [1, 1, 1, 2, 3, 4, 4, 5, 5, 6, 6, 7, 8, 9, 9, 9];
+
+    // 這裡是13張牌
+    // picks = [1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9];
+    render(picks);
+
+    // document.getElementById("show_total").innerHTML = DataMapping.show_cards(Tool.classify_by_remain(cards, 0));
 
 
     // 雖然會重覆算但不管

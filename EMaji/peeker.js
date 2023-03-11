@@ -27,8 +27,9 @@ let Statistician = {
     },
 
 
-    // 從形裡抓出候選cards
-    get_candidate_cards_from_shape: function (dic_shape) {
+    // 從聽牌形裡抓出候選cards
+    // https://gpnnotes.blogspot.com/2023/03/emaji.html
+    get_candidate_cards_from_shape16: function (dic_shape) {
 
         // 過濾掉 (3n)，留下其他的
         let temp_shape = {};
@@ -42,7 +43,7 @@ let Statistician = {
         let shape_count = Object.keys(temp_shape).length;
 
         if (shape_count == 1) {
-            console.log("if shape 1")
+            console.log("shape count == 1")
             // shape一定要是(3n+1)
             for (let key in temp_shape) {
                 let count = temp_shape[key];
@@ -51,7 +52,7 @@ let Statistician = {
                     return [];
             }
         } else if (shape_count == 2) {
-            console.log("if shape 2")
+            console.log("shape count == 2")
             //2個shape都要是(3n+2)
             for (let key in temp_shape) {
                 let count = temp_shape[key];
@@ -84,7 +85,7 @@ let Peeker = {
                 case 2:
                     g1++;
                     break;
-                case 3:
+                case 0:
                     g2++;
                     break;
             }
@@ -109,13 +110,21 @@ let Peeker = {
 
         let dic_card_count = Statistician.statistics_card_count(list);
 
+        // 透過形找出候選cards
+        let dic_shape = Statistician.statistics_shape(list);
+        let candidate_cards = Statistician.get_candidate_cards_from_shape16(dic_shape);
+
+        console.log("dic_shape", dic_shape);
+        console.log("candidate_cards", candidate_cards);
+
         // 已經有4個就過慮掉
         let can_add_cards = [];
-        for (let key in dic_card_count) {
-            let value = dic_card_count[key];
+        for (let card of candidate_cards) {
+            let value = dic_card_count[card];
             if (value != 4)
-                can_add_cards.push(parseInt(key)); // key是字串！
+                can_add_cards.push(card); // key是字串！
         }
+        console.log("can_add_cards", can_add_cards);
         return can_add_cards;
     },
 
