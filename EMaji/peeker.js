@@ -213,8 +213,8 @@ let Peeker = {
         let dic_card_count = Statistician.statistics_card_count(list);
         for (let eye of eyes) {
             split_block.length = 0;
-            if (dic_card_count[eye] < 2)
-                continue;
+            // if (dic_card_count[eye] < 2)
+            //     continue;
 
             let remain_list = Peeker.remove_eye(list, eye);
             split_block.push(DataMapping.show_cards([eye, eye]));
