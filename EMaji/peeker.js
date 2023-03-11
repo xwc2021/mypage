@@ -12,6 +12,7 @@ let Statistician = {
     },
 
     // 統計形
+    // key:color,value:count
     statistics_shape: function (list) {
         let dic = {};
         for (let x of list) {
@@ -23,6 +24,50 @@ let Statistician = {
                 ++dic[color];
         }
         return dic;
+    },
+
+
+    // 從形裡抓出候選cards
+    get_candidate_cards_from_shape: function (dic_shape) {
+
+        // 過濾掉 (3n)，留下其他的
+        let temp_shape = {};
+        for (let key in dic_shape) {
+            let count = dic_shape[key];
+            let remain = count % 3;
+            if (remain != 0)
+                temp_shape[key] = count;
+        }
+
+        let shape_count = Object.keys(temp_shape).length;
+
+        if (shape_count == 1) {
+            console.log("if shape 1")
+            // shape一定要是(3n+1)
+            for (let key in temp_shape) {
+                let count = temp_shape[key];
+                console.log("count", count)
+                if (count % 3 != 1)
+                    return [];
+            }
+        } else if (shape_count == 2) {
+            console.log("if shape 2")
+            //2個shape都要是(3n+2)
+            for (let key in temp_shape) {
+                let count = temp_shape[key];
+                console.log("count", count)
+                if (count % 3 != 2)
+                    return [];
+            }
+        } else
+            return [];
+
+        let card_list = [];
+        for (let key in temp_shape) {
+            console.log("shape", key)
+            card_list.push(...ColorMapping.data[key]);
+        }
+        return card_list;
     },
 };
 
@@ -61,6 +106,7 @@ let Peeker = {
     },
 
     get_can_add_cards: function (list) {
+
         let dic_card_count = Statistician.statistics_card_count(list);
 
         // 已經有4個就過慮掉
