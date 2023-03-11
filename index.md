@@ -29,6 +29,7 @@ Babylon.js
 three_js_chage_color_test  
 [three_js_chage_color_test](https://xwc2021.github.io/mypage/three_js_chage_color_test) 
 
-聽幾個洞  
-[聽幾個洞](https://xwc2021.github.io/mypage/EMaji) 
+聽幾個洞 
+[單花色](https://xwc2021.github.io/mypage/EMaji)  
+[多花色](https://xwc2021.github.io/mypage/EMaji/multiple.html) 
 
