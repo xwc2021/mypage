@@ -32,7 +32,7 @@ let Peeker = {
             return -1;
     },
 
-    statics: function (list) {
+    statics_card_count: function (list) {
         // 統計每張牌有幾張
         let dic = {};
         for (let x of list) {
@@ -45,12 +45,12 @@ let Peeker = {
     },
 
     get_can_add_cards: function (list) {
-        let dic_statics = Peeker.statics(list);
+        let dic_card_count = Peeker.statics_card_count(list);
 
         // 已經有4個就過慮掉
         let can_add_cards = [];
-        for (let key in dic_statics) {
-            let value = dic_statics[key];
+        for (let key in dic_card_count) {
+            let value = dic_card_count[key];
             if (value != 4)
                 can_add_cards.push(parseInt(key)); // key是字串！
         }
@@ -138,10 +138,10 @@ let Peeker = {
     },
 
     test_all_eye: function (list, eyes, split_block) {
-        let dic_statics = Peeker.statics(list);
+        let dic_card_count = Peeker.statics_card_count(list);
         for (let eye of eyes) {
             split_block.length = 0;
-            if (dic_statics[eye] < 2)
+            if (dic_card_count[eye] < 2)
                 continue;
 
             let remain_list = Peeker.remove_eye(list, eye);
