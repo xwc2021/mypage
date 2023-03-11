@@ -95,13 +95,13 @@ let Peeker = {
         // console.log(g0, g1, g2);
         if (g0 != g1 && g0 != g2 && g1 == g2) { // g0
             console.log("1,4,7");
-            return 0;
+            return 1;
         } else if (g1 != g0 && g1 != g2 && g0 == g2) { // g1
             console.log("2,5,8");
-            return 1;
+            return 2;
         } if (g2 != g0 && g2 != g1 && g0 == g1) { // g2
             console.log("3,6,9");
-            return 2;
+            return 0;
         } else
             return -1;
     },
@@ -209,6 +209,7 @@ let Peeker = {
     },
 
     test_all_eye: function (list, eyes, split_block) {
+        console.log("test_all_eye", eyes);
         let dic_card_count = Statistician.statistics_card_count(list);
         for (let eye of eyes) {
             split_block.length = 0;
@@ -217,13 +218,27 @@ let Peeker = {
 
             let remain_list = Peeker.remove_eye(list, eye);
             split_block.push(DataMapping.show_cards([eye, eye]));
-            console.log("remain_list", eye, DataMapping.show_cards(remain_list));
+            console.log("eye", eye);
+            console.log("remain_list", DataMapping.show_cards(remain_list));
 
             if (Peeker.is_nAAA_mABC(remain_list, split_block))
                 return true;
         }
 
         return false;
+    },
+
+    list_candidate_eyes: function (list, now_group) {
+        let dic_card_count = Statistician.statistics_card_count(list);
+        console.log("17張統計", dic_card_count);
+
+        let temp = [];
+        for (let card in dic_card_count) {
+            let count = dic_card_count[card];
+            if (count >= 2 && (card % 3) == now_group)
+                temp.push(parseInt(card));
+        }
+        return temp;
     },
 
     // 判定聽幾個洞
@@ -246,15 +261,15 @@ let Peeker = {
             let has_1eye_nAAA_mABC = false;
             // 存放拆出來的牌
             let split_block = [];
+            let candidate_eyes = Peeker.list_candidate_eyes(new_list, g);
+            console.log("candidate_eyes", candidate_eyes);
+
+
             switch (g) {
                 case 0:
-                    has_1eye_nAAA_mABC = Peeker.test_all_eye(new_list, [1, 4, 7], split_block);
-                    break;
                 case 1:
-                    has_1eye_nAAA_mABC = Peeker.test_all_eye(new_list, [2, 5, 8], split_block);
-                    break;
                 case 2:
-                    has_1eye_nAAA_mABC = Peeker.test_all_eye(new_list, [3, 6, 9], split_block);
+                    has_1eye_nAAA_mABC = Peeker.test_all_eye(new_list, candidate_eyes, split_block);
                     break;
             }
 
