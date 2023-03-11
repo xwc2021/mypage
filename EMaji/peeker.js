@@ -3,20 +3,15 @@ let Peeker = {
         let g0 = 0; let g1 = 0; let g2 = 0;
         for (let x of list) {
 
-            switch (x) {
+            let remain = x % 3;
+            switch (remain) {
                 case 1:
-                case 4:
-                case 7:
                     g0++;
                     break;
                 case 2:
-                case 5:
-                case 8:
                     g1++;
                     break;
                 case 3:
-                case 6:
-                case 9:
                     g2++;
                     break;
             }
