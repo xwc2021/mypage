@@ -1,3 +1,6 @@
+// 文件
+// https://gpnnotes.blogspot.com/2023/03/emaji.html
+
 let Statistician = {
     // 統計每張牌有幾張
     statistics_card_count: function (list) {
@@ -27,7 +30,7 @@ let Statistician = {
     },
 
 
-    // 從聽牌形裡抓出候選cards
+    // 透過聽牌形抓出候選cards
     // https://gpnnotes.blogspot.com/2023/03/emaji.html
     get_candidate_cards_from_shape16: function (dic_shape) {
 
@@ -106,7 +109,7 @@ let Peeker = {
             return -1;
     },
 
-    get_can_add_cards: function (list) {
+    list_candidate_cards: function (list) {
 
         let dic_card_count = Statistician.statistics_card_count(list);
 
@@ -117,15 +120,15 @@ let Peeker = {
         console.log("dic_shape", dic_shape);
         console.log("candidate_cards", candidate_cards);
 
-        // 已經有4個就過慮掉
-        let can_add_cards = [];
+        // 一樣的牌最多只能有4張
+        let valid_candidate_cards = [];
         for (let card of candidate_cards) {
             let value = dic_card_count[card];
             if (value != 4)
-                can_add_cards.push(card); // key是字串！
+                valid_candidate_cards.push(card);
         }
-        console.log("can_add_cards", can_add_cards);
-        return can_add_cards;
+        console.log("valid_candidate_cards", valid_candidate_cards);
+        return valid_candidate_cards;
     },
 
     remove_eye: function (list, value) {
@@ -208,8 +211,10 @@ let Peeker = {
         }
     },
 
-    test_all_eye: function (list, eyes, split_block) {
-        console.log("test_all_eye", eyes);
+    // 找眼測式
+    // https://gpnnotes.blogspot.com/2023/03/emaji.html
+    find_eye_testing: function (list, eyes, split_block) {
+        console.log("find_eye_testing", eyes);
         let dic_card_count = Statistician.statistics_card_count(list);
         for (let eye of eyes) {
             split_block.length = 0;
@@ -241,15 +246,16 @@ let Peeker = {
         return temp;
     },
 
-    // 判定聽幾個洞
-    find_hole: function (list) {
+    // 判定聽幾個洞：+1找眼測試
+    // https://gpnnotes.blogspot.com/2023/03/emaji.html
+    find_hole_testing: function (list) {
         let dic_listen_cards = {};
 
-        // 用來+1測試的牌
-        let can_add_cards = Peeker.get_can_add_cards(list);
+        // +1：列出所有的候選牌
+        let candidate_cards = Peeker.list_candidate_cards(list);
 
-        // 每個都測1次
-        for (let x of can_add_cards) {
+        // 對每個候選牌，都進行1次找眼測試
+        for (let x of candidate_cards) {
             let new_list = list.slice();
             new_list.push(x);
             new_list.sort((a, b) => a - b);
@@ -269,7 +275,7 @@ let Peeker = {
                 case 0:
                 case 1:
                 case 2:
-                    has_1eye_nAAA_mABC = Peeker.test_all_eye(new_list, candidate_eyes, split_block);
+                    has_1eye_nAAA_mABC = Peeker.find_eye_testing(new_list, candidate_eyes, split_block);
                     break;
             }
 

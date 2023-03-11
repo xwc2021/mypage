@@ -6,7 +6,7 @@ function render(cards) {
     let sort = DataMapping.show_cards(cards);
 
     // 聽幾個洞
-    let dic_holes = Peeker.find_hole(cards);
+    let dic_holes = Peeker.find_hole_testing(cards);
 
     // 顯示
     document.getElementById("show_list").innerHTML = raw;
