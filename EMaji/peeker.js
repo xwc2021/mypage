@@ -1,3 +1,31 @@
+let Statistician = {
+    // 統計每張牌有幾張
+    statistics_card_count: function (list) {
+        let dic = {};
+        for (let x of list) {
+            if (dic[x] == undefined)
+                dic[x] = 1;
+            else
+                ++dic[x];
+        }
+        return dic;
+    },
+
+    // 統計形
+    statistics_shape: function (list) {
+        let dic = {};
+        for (let x of list) {
+            let color = Drawer.color[x];
+
+            if (dic[color] == undefined)
+                dic[color] = 1;
+            else
+                ++dic[color];
+        }
+        return dic;
+    },
+};
+
 let Peeker = {
     find_eye_group: function (list) {
         let g0 = 0; let g1 = 0; let g2 = 0;
@@ -32,20 +60,8 @@ let Peeker = {
             return -1;
     },
 
-    statistics_card_count: function (list) {
-        // 統計每張牌有幾張
-        let dic = {};
-        for (let x of list) {
-            if (dic[x] == undefined)
-                dic[x] = 1;
-            else
-                ++dic[x];
-        }
-        return dic;
-    },
-
     get_can_add_cards: function (list) {
-        let dic_card_count = Peeker.statistics_card_count(list);
+        let dic_card_count = Statistician.statistics_card_count(list);
 
         // 已經有4個就過慮掉
         let can_add_cards = [];
@@ -138,7 +154,7 @@ let Peeker = {
     },
 
     test_all_eye: function (list, eyes, split_block) {
-        let dic_card_count = Peeker.statistics_card_count(list);
+        let dic_card_count = Statistician.statistics_card_count(list);
         for (let eye of eyes) {
             split_block.length = 0;
             if (dic_card_count[eye] < 2)
