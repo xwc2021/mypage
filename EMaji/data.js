@@ -34,7 +34,7 @@ let cards = [
     29, 31, 32, 33, 34, 35, 36,
 ];
 
-let Drawer = {
+let DataMapping = {
     emojis: {
         "1": "🀇",
         "2": "🀈",
@@ -119,7 +119,7 @@ let Drawer = {
     show_cards: function (array) {
         let str = "";
         for (let value of array) {
-            str += Drawer.emojis[value];
+            str += DataMapping.emojis[value];
         }
         return str;
     },

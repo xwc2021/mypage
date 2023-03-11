@@ -17,23 +17,23 @@ function pick_from(cards, pick_len) {
     // picks = [1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9];
 
     // 排序
-    let raw = Drawer.show_cards(picks);
+    let raw = DataMapping.show_cards(picks);
     picks.sort((a, b) => a - b);
-    let sort = Drawer.show_cards(picks);
+    let sort = DataMapping.show_cards(picks);
 
     // 聽幾個洞
     let dic_holes = Peeker.find_hole(picks);
 
     // 顯示
-    document.getElementById("show_total").innerHTML = Drawer.show_cards(cards);
+    document.getElementById("show_total").innerHTML = DataMapping.show_cards(cards);
     document.getElementById("show_list").innerHTML = raw;
     document.getElementById("show_sort_list").innerHTML = sort;
 
     let listen_list = "";
     let msg = "";
     for (let key in dic_holes) {
-        listen_list += Drawer.emojis[key] + ",";
-        msg += "聽" + Drawer.emojis[key] + "拆分：" + dic_holes[key] + "<br/>";
+        listen_list += DataMapping.emojis[key] + ",";
+        msg += "聽" + DataMapping.emojis[key] + "拆分：" + dic_holes[key] + "<br/>";
     }
     if (listen_list != "")
         document.getElementById("listen_cards_list").innerHTML = "聽：" + listen_list + "<br/>" + msg;

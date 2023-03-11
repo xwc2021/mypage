@@ -15,7 +15,7 @@ let Statistician = {
     statistics_shape: function (list) {
         let dic = {};
         for (let x of list) {
-            let color = Drawer.color[x];
+            let color = DataMapping.color[x];
 
             if (dic[color] == undefined)
                 dic[color] = 1;
@@ -100,8 +100,8 @@ let Peeker = {
             return false;
 
         list.splice(0, 3);
-        split_block.push(Drawer.show_cards([min, min, min]));
-        console.log("刻子", Drawer.show_cards(list));
+        split_block.push(DataMapping.show_cards([min, min, min]));
+        console.log("刻子", DataMapping.show_cards(list));
         return true;
     },
 
@@ -128,8 +128,8 @@ let Peeker = {
         for (let index of remove_index_list) {
             list.splice(index, 1);
         }
-        split_block.push(Drawer.show_cards([min - 2, min - 1, min]));
-        console.log("順子", Drawer.show_cards(list));
+        split_block.push(DataMapping.show_cards([min - 2, min - 1, min]));
+        console.log("順子", DataMapping.show_cards(list));
         return true;
     },
 
@@ -161,8 +161,8 @@ let Peeker = {
                 continue;
 
             let remain_list = Peeker.remove_eye(list, eye);
-            split_block.push(Drawer.show_cards([eye, eye]));
-            console.log("remain_list", eye, Drawer.show_cards(remain_list));
+            split_block.push(DataMapping.show_cards([eye, eye]));
+            console.log("remain_list", eye, DataMapping.show_cards(remain_list));
 
             if (Peeker.is_nAAA_mABC(remain_list, split_block))
                 return true;
@@ -185,7 +185,7 @@ let Peeker = {
             new_list.sort((a, b) => a - b);
 
             console.log("");
-            console.log("test:", Drawer.emojis[x], "->", Drawer.show_cards(new_list));
+            console.log("test:", DataMapping.emojis[x], "->", DataMapping.show_cards(new_list));
 
             let g = Peeker.find_eye_group(new_list);
             let has_1eye_nAAA_mABC = false;
