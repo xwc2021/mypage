@@ -151,20 +151,18 @@ let Peeker = {
     },
 
     if_has_AAA_then_remove: function (list, split_block) {
-        let min = list[0];
-        let remove_counter = 0;
-        for (let x of list) {
-            if (x == min)
-                ++remove_counter;
-        }
-
-        if (remove_counter < 3)
+        if (list.length < 3)
             return false;
 
-        list.splice(0, 3);
-        split_block.push(DataMapping.show_cards([min, min, min]));
-        console.log("刻子", DataMapping.show_cards(list));
-        return true;
+        let min = list[0];
+
+        if (list[1] == min && list[2] == min) {
+            list.splice(0, 3);
+            split_block.push(DataMapping.show_cards([min, min, min]));
+            console.log("刻子", DataMapping.show_cards(list));
+            return true;
+        } else
+            return false;
     },
 
     if_has_ABC_then_remove: function (list, split_block) {
