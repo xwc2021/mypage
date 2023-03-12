@@ -76,6 +76,10 @@ let Statistician = {
 };
 
 let Peeker = {
+
+    // 組：1 🀇🀊🀍 🀒🀕🀘 🀚🀝🀠 🀀🀃🀆
+    // 組：2 🀈🀋🀎 🀐🀓🀖 🀛🀞🀡       🀁🀄
+    // 組：0 🀉🀌🀏 🀑🀔🀗 🀙🀜🀟 🀂🀅
     find_eye_group: function (list) {
         let g0 = 0; let g1 = 0; let g2 = 0;
         for (let x of list) {
@@ -211,14 +215,15 @@ let Peeker = {
         }
     },
 
-    // 找眼測式
+    // 找眼測試
     // https://gpnnotes.blogspot.com/2023/03/emaji.html
     find_eye_testing: function (list, eyes, split_block) {
         console.log("find_eye_testing", eyes);
         let dic_card_count = Statistician.statistics_card_count(list);
-        for (let eye of eyes) {
+        for (let eye of eyes) { // 執行 XX_nAAA_mABC測試
             split_block.length = 0;
 
+            // remove XX
             let remain_list = Peeker.remove_eye(list, eye);
             split_block.push(DataMapping.show_cards([eye, eye]));
             console.log("eye", eye);
