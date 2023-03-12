@@ -34,4 +34,4 @@ let picks = [...picks_front, 31, 31];
 // 雙面聽
 // picks = [1, 1, 1, 2, 2, 2, 3, 3, 3, 14, 14, 31, 31, 4, 5, 6];
 
-render(picks);
+show_hole(picks);

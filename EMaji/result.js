@@ -1,4 +1,4 @@
-function render(cards) {
+function show_hole(cards) {
 
     // 排序
     let raw = DataMapping.show_cards(cards);

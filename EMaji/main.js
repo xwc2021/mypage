@@ -20,7 +20,7 @@ let picks = Tool.shuffle_and_pickup(cars_36, 13);
 // 測試：13張
 // picks = [1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9];
 
-render(picks);
+show_hole(picks);
 
 
 // let test_cards = [1, 2, 3, 4, 5, 6, 7, 8, 9,
