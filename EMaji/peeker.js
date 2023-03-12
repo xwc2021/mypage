@@ -213,23 +213,34 @@ let Peeker = {
         }
     },
 
+    XX_nAAA_mABC_test: function (list, eye, split_block) {
+        console.log("XX_nAAA_mABC測試");
+
+        // remove XX
+        let remain_list = Peeker.remove_eye(list, eye);
+        split_block.push(DataMapping.show_cards([eye, eye]));
+        console.log("eye", eye);
+        console.log("remain_list", DataMapping.show_cards(remain_list));
+
+        if (Peeker.is_nAAA_mABC(remain_list, split_block))
+            return true;
+        else {
+            console.log("失敗");
+            return false;
+        }
+    },
+
     // 找眼測試
     // https://gpnnotes.blogspot.com/2023/03/emaji.html
     find_eye_testing: function (list, eyes, split_block) {
         console.log("find_eye_testing", eyes);
-        let dic_card_count = Statistician.statistics_card_count(list);
-        for (let eye of eyes) { // 執行 XX_nAAA_mABC測試
+        for (let eye of eyes) {
             split_block.length = 0;
 
-            // remove XX
-            let remain_list = Peeker.remove_eye(list, eye);
-            split_block.push(DataMapping.show_cards([eye, eye]));
-            console.log("eye", eye);
-            console.log("remain_list", DataMapping.show_cards(remain_list));
-
-            if (Peeker.is_nAAA_mABC(remain_list, split_block))
+            // 執行 XX_nAAA_mABC測試
+            let test_result = Peeker.XX_nAAA_mABC_test(list, eye, split_block);
+            if (test_result)
                 return true;
-            else console.log("測試失敗");
         }
 
         console.log("全部失敗");
